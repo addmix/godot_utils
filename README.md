@@ -1,4 +1,4 @@
-# godot_utils
+# Godot Utils
 A library of utility functions for the Godot game engine.
 
 ## Usage
