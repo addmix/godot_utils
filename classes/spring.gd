@@ -1,4 +1,5 @@
 #class for 1D non-physics integrated springs, has to be explicitly updated using the positionvelocity() function.
+#can be used for interpolating 1D values, but is not good for performance.
 extends Resource
 
 class_name Spring
