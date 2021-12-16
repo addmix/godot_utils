@@ -1,4 +1,5 @@
 #class for 1D non-physics integrated springs, has to be explicitly updated using the positionvelocity() function.
+#best for objects in 3D space, such as guns with recoil and bobbles.
 extends Resource
 
 class_name V3Spring
