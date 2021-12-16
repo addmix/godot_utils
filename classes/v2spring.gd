@@ -1,3 +1,5 @@
+#class for 1D non-physics integrated springs, has to be explicitly updated using the positionvelocity() function.
+#best used for springy interpolation of UI components and 2D games, doesn't play well with regular physics.
 extends Resource
 
 class_name V2Spring
