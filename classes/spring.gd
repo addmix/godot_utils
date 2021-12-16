@@ -1,3 +1,4 @@
+#class for 1D non-physics integrated springs, has to be explicitly updated using the positionvelocity() function.
 extends Resource
 
 class_name Spring
