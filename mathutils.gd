@@ -1,4 +1,4 @@
-extends Node
+class_name MathUtils
 
 #used for gun sway, along with other things
 static func fromaxisangle(v3 : Vector3) -> Basis:
