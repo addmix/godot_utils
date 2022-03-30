@@ -11,10 +11,10 @@ static func get_random_ints(amount : int) -> Array:
 
 static func exclude_by_value(input : Array, exculde) -> Array:
 	var selection := []
-
-# warning-ignore:unused_variable
+	
+	# warning-ignore:unused_variable
 	for i in range(input.size()):
 		if input[i] != exculde:
 			selection.append(input[i])
-
+	
 	return selection

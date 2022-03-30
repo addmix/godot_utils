@@ -7,7 +7,7 @@ static func fromaxisangle(v3 : Vector3) -> Basis:
 	var m := pow(v3.x * v3.x + v3.y * v3.y + v3.z * v3.z, .5)
 	var si := sin(m / 2) / m
 	#quaternion
-	return Basis(Quat(si * v3.x, si * v3.y, si * v3.z, cos(m/2)))
+	return Basis(Quaternion(si * v3.x, si * v3.y, si * v3.z, cos(m/2)))
 
 #Vector3 random range function
 static func v3RandfRange(v1 : Vector3, v2 : Vector3) -> Vector3:
@@ -35,21 +35,21 @@ static func v3lerp(v0 : Vector3, v1 : Vector3, v2 : Vector3) -> Vector3:
 
 #plane intersection fucntion
 #http://tbirdal.blogspot.com/2016/10/a-better-approach-to-plane-intersection.html
-static func intersect_planes(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 : Vector3, p0 : Vector3) -> PoolVector3Array:
-
+static func intersect_planes(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 : Vector3, p0 : Vector3) -> PackedVector3Array:
+	
 	var M := [
 		[2, 0, 0, n1.x, n2.x],
 		[0, 2, 0, n1.y, n2.y],
 		[0, 0, 2, n1.z, n2.z],
 		[n1.x, n1.y, n1.z, 0, 0],
 		[n2.x, n2.y, n2.z, 0, 0]]
-
+	
 	var bx := p1 * n1
 	var by := p2 * n2
-
+	
 	var b4 := bx.x + bx.y + bx.z
 	var b5 := by.x + by.y + by.z
-
+	
 	var b = [
 		[2*p0.x],
 		[2*p0.y],
@@ -61,7 +61,7 @@ static func intersect_planes(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 : Vect
 	var x := multiply(inverse(M), b)
 	var p = Vector3(x[0][0], x[0][1], x[0][2])
 	var n = n1.cross(n2)
-	return PoolVector3Array([p, n])
+	return PackedVector3Array([p, n])
 
 
 #matrix multiplication funcs
@@ -130,8 +130,8 @@ static func bias(x : float, bias : float) -> float:
 	var k : float = pow(1 - bias, 3)
 	return (x * k) / (x * k - x + 1)
 
-static func quat_to_axis_angle(quat : Quat) -> Quat:
-	var axis_angle := Quat(0, 0, 0, 0)
+static func quat_to_axis_angle(quat : Quaternion) -> Quaternion:
+	var axis_angle := Quaternion(0, 0, 0, 0)
 
 	if quat.w > 1: #if w>1 acos and sqrt will produce errors, this cant happen if quaternion is normalised
 		quat = quat.normalized()
