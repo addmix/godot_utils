@@ -1,5 +1,7 @@
 class_name MathUtils
 
+const E = 2.7182818284
+
 #used for gun sway, along with other things
 static func fromaxisangle(v3 : Vector3) -> Basis:
 	if v3.length() < .00001:
@@ -149,3 +151,6 @@ static func quat_to_axis_angle(quat : Quat) -> Quat:
 		axis_angle.z = quat.z / axis_angle.w
 
 	return axis_angle
+
+	static func sigmoid(x : float, e : float = E) -> float:
+		return pow(e, x) / pow(e, x) + 1.0
