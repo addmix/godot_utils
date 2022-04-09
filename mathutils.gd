@@ -36,7 +36,7 @@ static func v3lerp(v0 : Vector3, v1 : Vector3, v2 : Vector3) -> Vector3:
 static func v3_clamp_length(v : Vector3, length : float) -> Vector3:
 	if v.length_squared() == 0:
 		return v
-	
+
 	return v.normalized() * min(length, v.length())
 
 #plane intersection fucntion
@@ -163,3 +163,6 @@ static func mix(a : float, b : float, amount : float) -> float:
 static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
 	var h = clamp(0.5 + 0.5 * (a - b) / k, 0.0, 1.0)
 	return mix(a, b, h) - k * h * (1.0 - h)
+
+static func sigmoid(x : float, e : float = E) -> float:
+	return pow(e, x) / pow(e, x) + 1.0
