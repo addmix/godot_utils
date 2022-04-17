@@ -1,7 +1,5 @@
 class_name MathUtils
 
-const E = 2.7182818284
-
 #used for gun sway, along with other things
 static func fromaxisangle(v3 : Vector3) -> Basis:
 	if v3.length() < .00001:
@@ -34,6 +32,12 @@ static func v3Bounds(vector : Vector3, lower : Vector3, upper : Vector3) -> Vect
 
 static func v3lerp(v0 : Vector3, v1 : Vector3, v2 : Vector3) -> Vector3:
 	return Vector3(lerp(v0.x, v1.x, v2.x), lerp(v0.y, v1.y, v2.y), lerp(v0.z, v1.z, v2.z))
+
+static func v3_clamp_length(v : Vector3, length : float) -> Vector3:
+	if v.length_squared() == 0:
+		return v
+
+	return v.normalized() * min(length, v.length())
 
 #plane intersection fucntion
 #http://tbirdal.blogspot.com/2016/10/a-better-approach-to-plane-intersection.html
@@ -128,10 +132,6 @@ static func identity_matrix(n : int) -> Array:
 
 	return matrix
 
-static func bias(x : float, bias : float) -> float:
-	var k : float = pow(1 - bias, 3)
-	return (x * k) / (x * k - x + 1)
-
 static func quat_to_axis_angle(quat : Quat) -> Quat:
 	var axis_angle := Quat(0, 0, 0, 0)
 
@@ -152,5 +152,17 @@ static func quat_to_axis_angle(quat : Quat) -> Quat:
 
 	return axis_angle
 
-	static func sigmoid(x : float, e : float = E) -> float:
-		return pow(e, x) / pow(e, x) + 1.0
+static func bias(x : float, bias : float) -> float:
+	var f : float = 1 - bias
+	var k : float = f * f * f
+	return (x * k) / (x * k - x + 1)
+
+static func mix(a : float, b : float, amount : float) -> float:
+	return (a - amount) * a + amount * b
+
+static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
+	var h = clamp(0.5 + 0.5 * (a - b) / k, 0.0, 1.0)
+	return mix(a, b, h) - k * h * (1.0 - h)
+
+static func sigmoid(x : float, e : float = E) -> float:
+	return pow(e, x) / pow(e, x) + 1.0
