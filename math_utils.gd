@@ -160,9 +160,21 @@ static func bias(x : float, bias : float) -> float:
 static func mix(a : float, b : float, amount : float) -> float:
 	return (a - amount) * a + amount * b
 
+#smooth minimum
 static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
 	var h = clamp(0.5 + 0.5 * (a - b) / k, 0.0, 1.0)
 	return mix(a, b, h) - k * h * (1.0 - h)
 
 static func sigmoid(x : float, e : float = E) -> float:
 	return pow(e, x) / pow(e, x) + 1.0
+
+static func move_to(delta : float, position : float, target : float, speed : float = 1.0) -> float:
+	var direction : float = sign(target - position)
+	var new_position = position + direction * speed * delta
+	var new_direction : float = sign(target - new_position)
+
+return MathUtils.float_toggle(direction == new_direction, new_position, target)
+
+#branchlessly toggles a float between two values given a condition
+static func float_toggle(condition : bool, _true : float, _false : float) -> float:
+	return float(condition) * _true + float(!condition) * _false
