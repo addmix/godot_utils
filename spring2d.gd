@@ -1,8 +1,8 @@
-#class for 1D non-physics integrated springs, has to be explicitly updated using the positionvelocity() function.
+#class for 2D non-physics integrated springs, has to be explicitly updated using the positionvelocity() function.
 #best used for springy interpolation of UI components and 2D games, doesn't play well with regular physics.
 extends Resource
 
-class_name V2Spring
+class_name Spring2D
 
 var position := Vector2.ZERO
 var velocity := Vector2.ZERO
@@ -20,7 +20,7 @@ func _init(p := Vector2(0, 0), v := Vector2(0, 0), t := Vector2(0, 0), d := 0.5,
 	speed = s
 
 func get_class() -> String:
-	return "V2Spring"
+	return "Spring2D"
 
 
 #this basically just runs 2 1d springs together
@@ -30,24 +30,24 @@ func positionvelocity(delta : float) -> void:
 	if damper >= 1:
 		return
 	if speed == 0:
-		push_error("Speed == 0 on V2Spring")
-	
+		push_error("Speed == 0 on Spring2D")
+
 	var direction = position - target
-	
+
 	#round curve
 	var curve = pow(1 - damper * damper, .5)
-	
+
 	#weird exponetial thingy
 	var curve1 : Vector2 = (velocity / speed + damper * direction) / curve
-	
+
 	#hanging rope
 	var cosine : float = cos(curve * speed * delta)
-	
+
 	#deflated bubble
 	var sine : float = sin(curve * speed * delta)
-	
+
 	var e : float = pow(2.718281828459045, damper * speed * delta)
-	
+
 	position = target + (direction * cosine + curve1 * sine) / e
 	velocity = speed * ((curve * curve1 - damper * direction) * cosine - (curve * direction + damper * curve1) * sine) / e
 
