@@ -1,5 +1,7 @@
 class_name MathUtils
 
+const E := 2.718281828459045
+
 #used for gun sway, along with other things
 static func fromaxisangle(v3 : Vector3) -> Basis:
 	if v3.length() < .00001:
@@ -173,7 +175,7 @@ static func move_to(delta : float, position : float, target : float, speed : flo
 	var new_position = position + direction * speed * delta
 	var new_direction : float = sign(target - new_position)
 
-return MathUtils.float_toggle(direction == new_direction, new_position, target)
+	return MathUtils.float_toggle(direction == new_direction, new_position, target)
 
 #branchlessly toggles a float between two values given a condition
 static func float_toggle(condition : bool, _true : float, _false : float) -> float:
