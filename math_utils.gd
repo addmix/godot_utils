@@ -4,7 +4,8 @@ const E := 2.718281828459045
 
 #used for gun sway, along with other things
 static func fromaxisangle(v3 : Vector3) -> Basis:
-	if v3.length() < .00001:
+	#true length doesn't matter, just terminate minimal rotations
+	if v3.length_squared() < .00001:
 		return Basis()
 	var m := pow(v3.x * v3.x + v3.y * v3.y + v3.z * v3.z, .5)
 	var si := sin(m / 2) / m
@@ -23,16 +24,16 @@ static func v3RandfRange(v1 : Vector3, v2 : Vector3) -> Vector3:
 
 	return Vector3(x, y, z)
 
-static func v3min(v1 : Vector3, v2 : Vector3) -> Vector3:
+static func v3_min(v1 : Vector3, v2 : Vector3) -> Vector3:
 	return Vector3(min(v1.x, v2.x), min(v1.y, v2.y), min(v1.z, v2.z))
 
-static func v3max(v1 : Vector3, v2 : Vector3) -> Vector3:
+static func v3_max(v1 : Vector3, v2 : Vector3) -> Vector3:
 	return Vector3(max(v1.x, v2.x), max(v1.y, v2.y), max(v1.z, v2.z))
 
-static func v3Bounds(vector : Vector3, lower : Vector3, upper : Vector3) -> Vector3:
-	return v3max(v3min(vector, upper), lower)
+static func v3_clamp(vector : Vector3, lower : Vector3, upper : Vector3) -> Vector3:
+	return v3_max(v3_min(vector, upper), lower)
 
-static func v3lerp(v0 : Vector3, v1 : Vector3, v2 : Vector3) -> Vector3:
+static func v3_lerp(v0 : Vector3, v1 : Vector3, v2 : Vector3) -> Vector3:
 	return Vector3(lerp(v0.x, v1.x, v2.x), lerp(v0.y, v1.y, v2.y), lerp(v0.z, v1.z, v2.z))
 
 static func v3_clamp_length(v : Vector3, length : float) -> Vector3:
@@ -41,23 +42,24 @@ static func v3_clamp_length(v : Vector3, length : float) -> Vector3:
 
 	return v.normalized() * min(length, v.length())
 
+#horribly inefficient
 #plane intersection fucntion
 #http://tbirdal.blogspot.com/2016/10/a-better-approach-to-plane-intersection.html
-static func intersect_planes(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 : Vector3, p0 : Vector3) -> PoolVector3Array:
-
+static func ray_plane_intersection(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 : Vector3, p0 : Vector3) -> PoolVector3Array:
+	
 	var M := [
 		[2, 0, 0, n1.x, n2.x],
 		[0, 2, 0, n1.y, n2.y],
 		[0, 0, 2, n1.z, n2.z],
 		[n1.x, n1.y, n1.z, 0, 0],
 		[n2.x, n2.y, n2.z, 0, 0]]
-
+	
 	var bx := p1 * n1
 	var by := p2 * n2
-
+	
 	var b4 := bx.x + bx.y + bx.z
 	var b5 := by.x + by.y + by.z
-
+	
 	var b = [
 		[2*p0.x],
 		[2*p0.y],
@@ -174,7 +176,11 @@ static func move_to(delta : float, position : float, target : float, speed : flo
 	var direction : float = sign(target - position)
 	var new_position = position + direction * speed * delta
 	var new_direction : float = sign(target - new_position)
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 	return MathUtils.float_toggle(direction == new_direction, new_position, target)
 
 #branchlessly toggles a float between two values given a condition
