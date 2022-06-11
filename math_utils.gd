@@ -24,8 +24,8 @@ static func move_to(delta : float, position : float, target : float, speed : flo
 	var direction : float = sign(target - position)
 	var new_position = position + direction * speed * delta
 	var new_direction : float = sign(target - new_position)
-	
-	return MathUtils.float_toggle(direction == new_direction, new_position, target)
+
+	return float_toggle(direction == new_direction, new_position, target)
 
 #smooth minimum
 static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
@@ -155,20 +155,20 @@ static func multiply(a : Array, b : Array) -> Array:
 #plane intersection fucntion
 #http://tbirdal.blogspot.com/2016/10/a-better-approach-to-plane-intersection.html
 static func ray_plane_intersection(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 : Vector3, p0 : Vector3) -> PoolVector3Array:
-	
+
 	var M := [
 		[2, 0, 0, n1.x, n2.x],
 		[0, 2, 0, n1.y, n2.y],
 		[0, 0, 2, n1.z, n2.z],
 		[n1.x, n1.y, n1.z, 0, 0],
 		[n2.x, n2.y, n2.z, 0, 0]]
-	
+
 	var bx := p1 * n1
 	var by := p2 * n2
-	
+
 	var b4 := bx.x + bx.y + bx.z
 	var b5 := by.x + by.y + by.z
-	
+
 	var b = [
 		[2*p0.x],
 		[2*p0.y],
