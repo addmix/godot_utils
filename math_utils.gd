@@ -25,7 +25,7 @@ static func move_to(delta : float, position : float, target : float, speed : flo
 	var new_position = position + direction * speed * delta
 	var new_direction : float = sign(target - new_position)
 
-	return MathUtils.float_toggle(direction == new_direction, new_position, target)
+	return float_toggle(direction == new_direction, new_position, target)
 
 #smooth minimum
 static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
@@ -70,6 +70,15 @@ static func v3_rand_range(v1 : Vector3, v2 : Vector3) -> Vector3:
 
 	return Vector3(x, y, z)
 
+static func closest_point_on_line_clamped(a : Vector3, b : Vector3, c : Vector3) -> Vector3:
+	b = (b - a).normalized()
+	c = c - a
+	return a + b * clamp(c.dot(b), 0.0, 1.0)
+
+static func closest_point_on_line(a : Vector3, b : Vector3, c : Vector3) -> Vector3:
+	b = (b - a).normalized()
+	c = c - a
+	return a + b * (c.dot(b))
 
 
 #transform/basis math
