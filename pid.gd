@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name PID
 
 var p : float = 0.2
@@ -19,6 +19,6 @@ func update(delta : float, error : float) -> float:
 	var derivative : float = (error - _last_error) / delta
 	_integral += error * delta
 	_last_error = error
-	
+
 	value = clamp(p * error + i * _integral + d * derivative, 0.0, 1.0)
 	return value

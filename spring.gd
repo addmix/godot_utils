@@ -29,19 +29,14 @@ func positionvelocity(delta : float) -> void:
 		push_error("Speed == 0 on Spring")
 	
 	var direction = position - target
-	
 	#round curve
 	var curve = pow(1 - pow(damper, 2), .5)
-	
 	#weird exponetial thingy
 	var curve1 = (velocity / speed + damper * direction) / curve
-	
 	#hanging rope
 	var cosine = cos(curve * speed * delta)
-	
 	#deflated bubble
 	var sine = sin(curve * speed * delta)
-	
 	var e = pow(2.718281828459045, damper * speed * delta)
 	
 	position = target + (direction * cosine + curve1 * sine) / e
