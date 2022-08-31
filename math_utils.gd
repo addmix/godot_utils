@@ -92,8 +92,8 @@ static func closest_point_on_line(a : Vector3, b : Vector3, c : Vector3) -> Vect
 
 
 
-static func quat_to_axis_angle(quat : Quat) -> Quat:
-	var axis_angle := Quat(0, 0, 0, 0)
+static func quat_to_axis_angle(quat : Quaternion) -> Quaternion:
+	var axis_angle := Quaternion(0, 0, 0, 0)
 
 	if quat.w > 1: #if w>1 acos and sqrt will produce errors, this cant happen if quaternion is normalised
 		quat = quat.normalized()
@@ -170,7 +170,7 @@ static func multiply(a : Array, b : Array) -> Array:
 
 #plane intersection fucntion
 #http://tbirdal.blogspot.com/2016/10/a-better-approach-to-plane-intersection.html
-static func ray_plane_intersection(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 : Vector3, p0 : Vector3) -> PoolVector3Array:
+static func ray_plane_intersection(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 : Vector3, p0 : Vector3) -> Array[Vector3]:
 
 	var M := [
 		[2, 0, 0, n1.x, n2.x],
@@ -196,7 +196,7 @@ static func ray_plane_intersection(p1 : Vector3, n1 : Vector3, p2 : Vector3, n2 
 	var x := multiply(inverse(M), b)
 	var p = Vector3(x[0][0], x[0][1], x[0][2])
 	var n = n1.cross(n2)
-	return PoolVector3Array([p, n])
+	return [p, n]
 
 #matrix multiplication funcs
 #https://godotengine.org/qa/41768/matrix-matrix-vector-multiplication
