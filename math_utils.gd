@@ -49,6 +49,13 @@ static func v3_clamp_length(v : Vector3, length : float) -> Vector3:
 		return v
 	return v.normalized() * min(length, v.length())
 
+static func v3_move_to(delta : float, position : Vector3, target : Vector3, speed : float = 1.0) -> Vector3:
+	var x : float = move_to(delta, position.x, target.x, speed)
+	var y : float = move_to(delta, position.y, target.y, speed)
+	var z : float = move_to(delta, position.z, target.z, speed)
+
+	return Vector3(x, y, z)
+
 static func v3_lerp(v0 : Vector3, v1 : Vector3, v2 : Vector3) -> Vector3:
 	return Vector3(lerp(v0.x, v1.x, v2.x), lerp(v0.y, v1.y, v2.y), lerp(v0.z, v1.z, v2.z))
 
