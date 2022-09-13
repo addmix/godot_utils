@@ -42,3 +42,6 @@ func receive_ping_dictionary(ping_dictionary : Dictionary) -> void:
 	if multiplayer.get_remote_sender_id() != 1:
 		return
 	ping_dictionary = ping_dictionary
+
+func get_ping(id : int) -> float:
+	return ping_dictionary[id]
