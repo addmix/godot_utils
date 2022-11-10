@@ -4,15 +4,22 @@ extends Resource
 
 class_name Spring2D
 
-var position := Vector2.ZERO
-var velocity := Vector2.ZERO
-var target := Vector2.ZERO
-var damper : float = 0
-var speed : float = 1
-var mass : float = 1
+@export var damper : float = 0
+@export var speed : float = 1
+
+@export var position := Vector2.ZERO
+var x : float = 0.0:
+	get:
+		return position.x
+var y : float = 0.0:
+	get:
+		return position.y
+@export var velocity := Vector2.ZERO
+@export var target := Vector2.ZERO
+@export var mass : float = 1
 
 #base funcs
-func _init(p := Vector2(0, 0), v := Vector2(0, 0), t := Vector2(0, 0), d := 0.5, s := 1.0) -> void:
+func _init(d := 0.5, s := 1.0, p := Vector2(0, 0), v := Vector2(0, 0), t := Vector2(0, 0)) -> void:
 	position = p
 	velocity = v
 	target = t
@@ -26,7 +33,7 @@ func get_class() -> String:
 #this basically just runs 2 1d springs together
 #im pretty sure this will be effected by gimbal lock
 #physics funcs
-func positionvelocity(delta : float) -> void:
+func update(delta : float) -> void:
 	if damper >= 1:
 		return
 	if speed == 0:

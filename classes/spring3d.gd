@@ -4,20 +4,29 @@ extends Resource
 
 class_name Spring3D
 
-var position := Vector3.ZERO
-var velocity := Vector3.ZERO
-var target := Vector3.ZERO
-var damper : float = 0
-var speed : float = 1
-var mass : float = 1
+@export var position := Vector3.ZERO
+var x : float = 0.0:
+	get:
+		return position.x
+var y : float = 0.0:
+	get:
+		return position.y
+var z : float = 0.0:
+	get:
+		return position.z
+@export var velocity := Vector3.ZERO
+@export var target := Vector3.ZERO
+@export var damper : float = 0
+@export var frequency : float = 1
+@export var mass : float = 1
 
 #base funcs
-func _init(p := Vector3(0, 0, 0), v := Vector3(0, 0, 0), t := Vector3(0, 0, 0), d := 0.5, s := 1.0) -> void:
+func _init(d := 0.5, f := 1.0, p := Vector3(0, 0, 0), v := Vector3(0, 0, 0), t := Vector3(0, 0, 0)) -> void:
 	position = p
 	velocity = v
 	target = t
 	damper = d
-	speed = s
+	frequency = f
 
 func get_class() -> String:
 	return "Spring3D"
@@ -26,28 +35,28 @@ func get_class() -> String:
 #this basically just runs 3 1d springs together
 #im pretty sure this will be effected by gimbal lock
 #physics funcs
-func positionvelocity(delta : float) -> void:
+func update(delta : float) -> void:
 	if damper >= 1:
 		return
-	if speed == 0:
+	if frequency == 0:
 		push_error("Speed == 0 on Spring3D")
 
 	var direction = position - target
 	#round curve
 	var curve = pow(1 - damper * damper, .5)
 	#weird exponetial thingy
-	var curve1 : Vector3 = (velocity / speed + damper * direction) / curve
+	var curve1 : Vector3 = (velocity / frequency + damper * direction) / curve
 	#hanging rope
-	var cosine : float = cos(curve * speed * delta)
+	var cosine : float = cos(curve * frequency * delta)
 	#deflated bubble
-	var sine : float = sin(curve * speed * delta)
-	var e : float = pow(2.718281828459045, damper * speed * delta)
+	var sine : float = sin(curve * frequency * delta)
+	var e : float = pow(2.718281828459045, damper * frequency * delta)
 
 	position = target + (direction * cosine + curve1 * sine) / e
-	velocity = speed * ((curve * curve1 - damper * direction) * cosine - (curve * direction + damper * curve1) * sine) / e
+	velocity = frequency * ((curve * curve1 - damper * direction) * cosine - (curve * direction + damper * curve1) * sine) / e
 
-func apply_force(f : Vector3) -> void:
-	velocity += f / mass
+func apply_impulse(_impulse : Vector3, _position : Vector3) -> void:
+	accelerate(_impulse / mass)
 
 func accelerate(s : Vector3) -> void:
 	velocity += s

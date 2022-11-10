@@ -4,14 +4,15 @@ extends Resource
 
 class_name Spring
 
-var position : float = 0
-var velocity : float = 0
-var target : float = 0
-var damper : float = 0
-var speed : float = 1
-var mass : float = 1
+@export var damper : float = 0
+@export var speed : float = 1
 
-func _init(p : float, v : float, t : float, d : float, s : float) -> void:
+@export var position : float = 0
+@export var velocity : float = 0
+@export var target : float = 0
+@export var mass : float = 1
+
+func _init(d := 0.5, s := 1.0, p := 0.0, v := 0.0, t := 0.0) -> void:
 	position = p
 	velocity = v
 	target = t
@@ -22,7 +23,7 @@ func get_class() -> String:
 	return "Spring"
 
 #returns position, velocity
-func positionvelocity(delta : float) -> void:
+func update(delta : float) -> void:
 	if damper >= 1:
 		return
 	if speed == 0:
