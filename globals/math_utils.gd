@@ -3,6 +3,15 @@ class_name MathUtils
 const E := 2.718281828459045
 
 
+#type-less functions
+
+
+static func toggle(condition : bool, _true : Variant, _false : Variant) -> Variant:
+	return float(condition) * _true + float(!condition) * _false
+
+
+
+
 
 #float math functions
 
@@ -20,9 +29,10 @@ static func float_toggle(condition : bool, _true : float, _false : float) -> flo
 static func mix(a : float, b : float, amount : float) -> float:
 	return (a - amount) * a + amount * b
 
-static func move_to(delta : float, position : float, target : float, speed : float = 1.0) -> float:
+#deprecated, use GDScript global move_toward() function
+static func move_to(position : float, target : float, speed : float = 1.0) -> float:
 	var direction : float = sign(target - position)
-	var new_position = position + direction * speed * delta
+	var new_position = position + direction * speed
 	var new_direction : float = sign(target - new_position)
 
 	return float_toggle(direction == new_direction, new_position, target)
@@ -40,7 +50,6 @@ static func sigmoid(x : float, e : float = E) -> float:
 #Vector3 math
 
 
-
 static func v3_clamp(vector : Vector3, lower : Vector3, upper : Vector3) -> Vector3:
 	return v3_max(v3_min(vector, upper), lower)
 
@@ -49,11 +58,23 @@ static func v3_clamp_length(v : Vector3, length : float) -> Vector3:
 		return v
 	return v.normalized() * min(length, v.length())
 
-static func v3_move_to(delta : float, position : Vector3, target : Vector3, speed : float = 1.0) -> Vector3:
-	var x : float = move_to(delta, position.x, target.x, speed)
-	var y : float = move_to(delta, position.y, target.y, speed)
-	var z : float = move_to(delta, position.z, target.z, speed)
+static func v3_distance_manhattan(a : Vector3, b : Vector3) -> float:
+	return abs(a.x - b.x) + abs(a.y - b.y) + abs(a.z - b.z)
 
+static func v3_distance_chebyshev(a : Vector3, b : Vector3) -> float:
+	return max(abs(a.x - b.x),
+	max(abs(a.y - b.y),
+	abs(a.z - b.z)))
+
+static func v3_move_toward(position : Vector3, target : Vector3, delta : float = 1.0) -> Vector3:
+	var direction : Vector3 = target - position
+	var distance_squared : float = direction.length_squared()
+	return v3_toggle(delta * delta > distance_squared, target, position + direction.normalized() * delta)
+
+static func v3_move_toward_individual(position : Vector3, target : Vector3, delta : float = 1.0) -> Vector3:
+	var x : float = move_toward(position.x, target.x, delta)
+	var y : float = move_toward(position.y, target.y, delta)
+	var z : float = move_toward(position.z, target.z, delta)
 	return Vector3(x, y, z)
 
 static func v3_lerp(v0 : Vector3, v1 : Vector3, v2 : Vector3) -> Vector3:
@@ -76,6 +97,9 @@ static func v3_rand_range(v1 : Vector3, v2 : Vector3) -> Vector3:
 	var z := rng.randf_range(v1.z, v2.z)
 
 	return Vector3(x, y, z)
+
+static func v3_toggle(condition : bool, _true : Vector3, _false : Vector3) -> Vector3:
+	return float(condition) * _true + float(!condition) * _false
 
 static func closest_point_on_line_clamped(a : Vector3, b : Vector3, c : Vector3) -> Vector3:
 	b = (b - a).normalized()
