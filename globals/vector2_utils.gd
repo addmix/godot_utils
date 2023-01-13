@@ -31,19 +31,19 @@ static func length_manhattan(a : Vector2) -> float:
 static func length_chebyshev(a : Vector2) -> float:
 	return max(abs(a.x), abs(a.y))
 
-static func lerp(v0 : Vector2, v1 : Vector2, v2 : Vector2) -> Vector2:
-	return Vector2(lerp(v0.x, v1.x, v2.x), lerp(v0.y, v1.y, v2.y))
+static func lerp(a : Vector2, b : Vector2, c : Vector2) -> Vector2:
+	return Vector2(lerp(a.x, b.x, c.x), lerp(a.y, b.y, c.y))
 
-static func max(v0 : Vector2, v1 : Vector2) -> Vector2:
-	return Vector2(max(v0.x, v1.x), max(v0.y, v1.y))
+static func max(a : Vector2, b : Vector2) -> Vector2:
+	return Vector2(max(a.x, b.x), max(a.y, b.y))
 
-static func min(v0 : Vector2, v1 : Vector2) -> Vector2:
-	return Vector2(min(v0.x, v1.x), min(v0.y, v1.y))
+static func min(a : Vector2, b : Vector2) -> Vector2:
+	return Vector2(min(a.x, b.x), min(a.y, b.y))
 
 #Vector3 random range function
-static func rand_range(v0 : Vector2, v1 : Vector2) -> Vector2:
-	var x := randf_range(v0.x, v1.x)
-	var y := randf_range(v0.y, v1.y)
+static func rand_range(a : Vector2, b : Vector2) -> Vector2:
+	var x := randf_range(a.x, b.x)
+	var y := randf_range(a.y, b.y)
 	return Vector2(x, y)
 
 static func toggle(condition : bool, _true : Vector2, _false : Vector2) -> Vector2:
