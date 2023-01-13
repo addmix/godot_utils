@@ -3,13 +3,13 @@ class_name MathUtils
 const E := 2.718281828459045
 
 
+
 #type-less functions
+
 
 
 static func toggle(condition : bool, _true : Variant, _false : Variant) -> Variant:
 	return float(condition) * _true + float(!condition) * _false
-
-
 
 
 
@@ -44,97 +44,6 @@ static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
 
 static func sigmoid(x : float, e : float = E) -> float:
 	return pow(e, x) / pow(e, x) + 1.0
-
-
-
-#Vector3 math
-
-
-static func v3_clamp(vector : Vector3, lower : Vector3, upper : Vector3) -> Vector3:
-	return v3_max(v3_min(vector, upper), lower)
-
-static func v3_clamp_length(v : Vector3, length : float) -> Vector3:
-	if v.length_squared() == 0:
-		return v
-	return v.normalized() * min(length, v.length())
-
-static func v3_distance_manhattan(a : Vector3, b : Vector3) -> float:
-	return abs(a.x - b.x) + abs(a.y - b.y) + abs(a.z - b.z)
-
-static func v3_distance_chebyshev(a : Vector3, b : Vector3) -> float:
-	return max(abs(a.x - b.x),
-	max(abs(a.y - b.y),
-	abs(a.z - b.z)))
-
-static func v3_move_toward(position : Vector3, target : Vector3, delta : float = 1.0) -> Vector3:
-	var direction : Vector3 = target - position
-	var distance_squared : float = direction.length_squared()
-	return v3_toggle(delta * delta > distance_squared, target, position + direction.normalized() * delta)
-
-static func v3_move_toward_individual(position : Vector3, target : Vector3, delta : float = 1.0) -> Vector3:
-	var x : float = move_toward(position.x, target.x, delta)
-	var y : float = move_toward(position.y, target.y, delta)
-	var z : float = move_toward(position.z, target.z, delta)
-	return Vector3(x, y, z)
-
-static func v3_lerp(v0 : Vector3, v1 : Vector3, v2 : Vector3) -> Vector3:
-	return Vector3(lerp(v0.x, v1.x, v2.x), lerp(v0.y, v1.y, v2.y), lerp(v0.z, v1.z, v2.z))
-
-static func v3_max(v1 : Vector3, v2 : Vector3) -> Vector3:
-	return Vector3(max(v1.x, v2.x), max(v1.y, v2.y), max(v1.z, v2.z))
-
-static func v3_min(v1 : Vector3, v2 : Vector3) -> Vector3:
-	return Vector3(min(v1.x, v2.x), min(v1.y, v2.y), min(v1.z, v2.z))
-
-#Vector3 random range function
-static func v3_rand_range(v1 : Vector3, v2 : Vector3) -> Vector3:
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	var x := rng.randf_range(v1.x, v2.x)
-	rng.randomize()
-	var y := rng.randf_range(v1.y, v2.y)
-	rng.randomize()
-	var z := rng.randf_range(v1.z, v2.z)
-
-	return Vector3(x, y, z)
-
-static func v3_toggle(condition : bool, _true : Vector3, _false : Vector3) -> Vector3:
-	return float(condition) * _true + float(!condition) * _false
-
-static func closest_point_on_line_clamped(a : Vector3, b : Vector3, c : Vector3) -> Vector3:
-	b = (b - a).normalized()
-	c = c - a
-	return a + b * clamp(c.dot(b), 0.0, 1.0)
-
-static func closest_point_on_line(a : Vector3, b : Vector3, c : Vector3) -> Vector3:
-	b = (b - a).normalized()
-	c = c - a
-	return a + b * (c.dot(b))
-
-
-#transform/basis math
-
-
-
-static func quat_to_axis_angle(quat : Quaternion) -> Quaternion:
-	var axis_angle := Quaternion(0, 0, 0, 0)
-
-	if quat.w > 1: #if w>1 acos and sqrt will produce errors, this cant happen if quaternion is normalised
-		quat = quat.normalized()
-
-	var angle = 2.0 * acos(quat.w)
-	axis_angle.w = sqrt(1 - quat.w * quat.w) #assuming quaternion normalised then w is less than 1, so term always positive.
-
-	if axis_angle.w < 0.00001: #test to avoid divide by zero, s is always positive due to sqrt
-		axis_angle.x = quat.x
-		axis_angle.y = quat.y
-		axis_angle.z = quat.z
-	else:
-		axis_angle.x = quat.x / axis_angle.w
-		axis_angle.y = quat.y / axis_angle.w
-		axis_angle.z = quat.z / axis_angle.w
-
-	return axis_angle
 
 
 
