@@ -1,4 +1,4 @@
-extends RefCounted
+extends Resource
 class_name PID
 
 var p : float = 0.2
