@@ -20,5 +20,5 @@ func update(delta : float, error : float) -> float:
 	_integral += error * delta
 	_last_error = error
 
-	value = clamp(p * error + i * _integral + d * derivative, 0.0, 1.0)
+	value = p * error + i * _integral + d * derivative
 	return value
