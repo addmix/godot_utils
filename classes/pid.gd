@@ -1,9 +1,9 @@
 extends Resource
 class_name PID
 
-var p : float = 0.2
-var i : float = 0.05
-var d : float = 1.0
+@export var p : float = 0.2
+@export var i : float = 0.05
+@export var d : float = 1.0
 
 var output : float = 0
 
