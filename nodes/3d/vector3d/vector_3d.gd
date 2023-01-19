@@ -9,7 +9,7 @@ class_name Vector3D
 
 		#this bit just prevents errors of parallel and zero values
 		var length_squared := value.length_squared()
-		if position == value or length_squared == 0.0:
+		if is_equal_approx((transform.origin - value).length_squared(), 0.0) or length_squared == 0.0:
 			return
 		var up = Vector3(0, 1, 0)
 		var dot := value.dot(up)
