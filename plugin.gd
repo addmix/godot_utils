@@ -36,5 +36,13 @@ func _enter_tree() -> void:
 	add_custom_type("Vector3D", "MeshInstance3D", vector_3d, node3d_icon)
 
 func _exit_tree() -> void:
-	# Clean-up of the plugin goes here.
-	pass
+	remove_custom_type("PID")
+	remove_custom_type("Spring")
+	remove_custom_type("Spring2D")
+	remove_custom_type("Spring3D")
+	remove_custom_type("SpringTransform")
+
+	remove_custom_type("StateMachine")
+	remove_custom_type("State")
+
+	remove_custom_type("Vector3D")
