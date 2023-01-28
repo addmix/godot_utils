@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://i8nfbldhsvav"]
+
+[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Player.gd" id="1_c033c"]
+[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/state_machine.gd" id="1_lstjd"]
+[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Idle.gd" id="2_xpbd6"]
+[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Moving.gd" id="4_gpy0x"]
+[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Jumping.gd" id="5_sw583"]
+[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Falling.gd" id="6_4vcqc"]
+[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Landed.gd" id="7_dhnli"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fl4i7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v31tn"]
+radius = 20.0
+height = 80.0
+
+[node name="Demo" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(580, 546)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_fl4i7")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -659.0
+offset_right = 672.0
+offset_bottom = 203.0
+color = Color(0, 0.517647, 0.0509804, 1)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(468, 226)
+script = ExtResource("1_c033c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_v31tn")
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = 40.0
+
+[node name="MovementStateMachine" type="Node" parent="Player"]
+script = ExtResource("1_lstjd")
+current_state = "Idle"
+
+[node name="Idle" type="Node" parent="Player/MovementStateMachine"]
+script = ExtResource("2_xpbd6")
+
+[node name="Moving" type="Node" parent="Player/MovementStateMachine"]
+script = ExtResource("4_gpy0x")
+
+[node name="Jumping" type="Node" parent="Player/MovementStateMachine"]
+script = ExtResource("5_sw583")
+
+[node name="Falling" type="Node" parent="Player/MovementStateMachine"]
+script = ExtResource("6_4vcqc")
+
+[node name="Landed" type="Node" parent="Player/MovementStateMachine"]
+script = ExtResource("7_dhnli")
