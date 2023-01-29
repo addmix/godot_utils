@@ -12,3 +12,13 @@ static func get_child_recursive(obj : Node) -> Array:
 		arr += get_child_recursive(children[i])
 
 	return arr
+
+#recursive function
+static func get_first_parent_which_is_a(obj : Node, type) -> Node:
+	var parent := obj.get_parent()
+	if parent == null:
+		return null
+	elif parent is type:
+		return parent
+	else:
+		return get_first_parent_which_is_a(parent, type)
