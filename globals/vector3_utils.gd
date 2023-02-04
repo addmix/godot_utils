@@ -2,7 +2,7 @@ class_name V3Utils
 
 
 static func clamp(vector : Vector3, lower : Vector3, upper : Vector3) -> Vector3:
-	return max(min(vector, upper), lower)
+	return V3Utils.max(V3Utils.min(vector, upper), lower)
 
 static func clamp_length(v : Vector3, length : float) -> Vector3:
 	if v.length_squared() == 0:
