@@ -55,12 +55,19 @@ static func rand_range(a : Vector3, b : Vector3) -> Vector3:
 static func toggle(condition : bool, _true : Vector3, _false : Vector3) -> Vector3:
 	return float(condition) * _true + float(!condition) * _false
 
+static func closest_point_on_line(a : Vector3, b : Vector3, c : Vector3) -> Vector3:
+	b = (b - a).normalized()
+	c = c - a
+	return a + b * (c.dot(b))
+
+#clamps between line lerp value 0 and 1
 static func closest_point_on_line_clamped(a : Vector3, b : Vector3, c : Vector3) -> Vector3:
 	b = (b - a).normalized()
 	c = c - a
 	return a + b * clamp(c.dot(b), 0.0, 1.0)
 
-static func closest_point_on_line(a : Vector3, b : Vector3, c : Vector3) -> Vector3:
-	b = (b - a).normalized()
+#gives lerp value of line, from 0 to 1
+func closest_point_on_line_normalized(a : Vector3, b : Vector3, c : Vector3) -> float:
+	b = b - a
 	c = c - a
-	return a + b * (c.dot(b))
+	return c.dot(b.normalized()) / b.length()
