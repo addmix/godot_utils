@@ -13,12 +13,13 @@ const spring2d = preload("./resources/spring2d.gd")
 const spring3d = preload("./resources/spring3d.gd")
 const spring_transform = preload("./resources/spring_transform.gd")
 
-#nodes
+#nodes/state_machine
 const state_machine = preload("./nodes/state_machine/state_machine.gd")
 const state = preload("./nodes/state_machine/state.gd")
 
 #nodes/3d
 const vector_3d = preload("./nodes/3d/vector_3d/vector_3d.gd")
+const floating_origin = preload("./nodes/3d/floating_origin.gd")
 
 func _enter_tree() -> void:
 	#resources
@@ -34,6 +35,7 @@ func _enter_tree() -> void:
 
 	#nodes/3d
 	add_custom_type("Vector3D", "MeshInstance3D", vector_3d, node3d_icon)
+	add_custom_type("FloatingOrigin", "Node3D", floating_origin, node3d_icon)
 
 func _exit_tree() -> void:
 	remove_custom_type("PID")
