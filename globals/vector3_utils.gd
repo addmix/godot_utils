@@ -67,7 +67,7 @@ static func closest_point_on_line_clamped(a : Vector3, b : Vector3, c : Vector3)
 	return a + b * clamp(c.dot(b), 0.0, 1.0)
 
 #gives lerp value of line, from 0 to 1
-func closest_point_on_line_normalized(a : Vector3, b : Vector3, c : Vector3) -> float:
+static func closest_point_on_line_normalized(a : Vector3, b : Vector3, c : Vector3) -> float:
 	b = b - a
 	c = c - a
 	return c.dot(b.normalized()) / b.length()
