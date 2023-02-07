@@ -1,5 +1,8 @@
 class_name Physics3DUtils
 
+#https://github.com/godotengine/godot-proposals/issues/773
+func get_point_velocity(node : PhysicsBody3D, relative_position : Vector3) -> Vector3:
+	return node.linear_velocity + node.angular_velocity.cross(relative_position - node.center_of_mass);
 
 static func tpn(proportionality_constant : float, closing_velocity : float, los_rate : Vector2) -> Vector2:
 	return proportionality_constant * closing_velocity * los_rate
