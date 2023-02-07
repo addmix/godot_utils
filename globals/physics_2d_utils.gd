@@ -5,7 +5,7 @@ static func get_point_velocity(node : PhysicsBody2D, relative_position : Vector2
 	return node.linear_velocity + Vector2(-node.angular_velocity * relative_position.y, node.angular_velocity * relative_position.x);
 
 #returns the change in line of sight necessary to collide
-static func prop_nav(delta : float, position : Vector2, velocity : Vector2, target_position : Vector2, target_velocity : Vector2, proportionality_constant : float = 4.0) -> float:
+static func proportional_navigation(delta : float, position : Vector2, velocity : Vector2, target_position : Vector2, target_velocity : Vector2, proportionality_constant : float = 4.0) -> float:
 	var relative_position : Vector2 = position - target_position
 	var closing_velocity : float = -((velocity - target_velocity).dot(relative_position) / relative_position.length())
 
