@@ -10,6 +10,11 @@ var _can_shift : bool = true
 
 #current chunks of offset
 var current_offset : Vector3i = Vector3i.ZERO
+var global_offset : Vector3 = Vector3.ZERO
+
+func _ready() -> void:
+	if has_node("/root/FloatingOriginHelper"):
+		FloatingOriginHelper.floating_origin = self
 
 func shift_origin(_position : Vector3) -> void:
 	#get closest cell
@@ -25,7 +30,9 @@ func shift_origin(_position : Vector3) -> void:
 
 	#we'll see how well shifting the root node only will work
 	global_position -= Vector3(change_in_cells) * shift_threshold
+
 	current_offset += change_in_cells
+	global_offset = Vector3(current_offset) * shift_threshold
 
 	origin_shifted.emit(Vector3(change_in_cells) * shift_threshold)
 
