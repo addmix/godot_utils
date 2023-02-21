@@ -10,10 +10,10 @@ var output : float = 0
 var _last_error : float
 var _integral : float
 
-func _init(p : float, i : float, d : float) -> void:
-	self.p = p
-	self.i = i
-	self.d = d
+func _init(_p : float, _i : float, _d : float) -> void:
+	self.p = _p
+	self.i = _i
+	self.d = _d
 
 func update(delta : float, error : float) -> float:
 	var derivative : float = (error - _last_error) / delta
