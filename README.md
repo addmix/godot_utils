@@ -1,5 +1,5 @@
 # Godot Utils
-A library of utility functions for the Godot game engine.
+A library of utility functions and nodes for the Godot game engine.
 
 ## Installation
 1. Download and un-zip files.
