@@ -1,4 +1,4 @@
-extends Node
+class_name AlgorithmUtils
 
 static func get_random_ints(amount : int) -> Array:
 	var array := []
