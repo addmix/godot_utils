@@ -4,6 +4,7 @@ class_name FloatingOrigin
 signal pre_origin_shift
 signal origin_shifted
 
+@export var disabled : bool = false
 @export var shift_threshold : float = 1024.0
 @export var shift_cooldown : float = 5.0
 var _can_shift : bool = true
@@ -33,10 +34,11 @@ func shift_origin(_position : Vector3) -> void:
 
 	current_offset += change_in_cells
 	global_offset = Vector3(current_offset) * shift_threshold
-
 	origin_shifted.emit(Vector3(change_in_cells) * shift_threshold)
 
 func _physics_process(delta: float) -> void:
+	if disabled:
+		return
 	var current_camera : Camera3D = get_viewport().get_camera_3d()
 	if current_camera == null:
 		return
@@ -44,6 +46,6 @@ func _physics_process(delta: float) -> void:
 	if _can_shift and V3Utils.length_chebyshev(camera_position) > shift_threshold:
 		_can_shift = false
 
-		shift_origin(camera_position)
+		shift_origin.call_deferred(camera_position)
 		await(get_tree().create_timer(shift_cooldown).timeout)
 		_can_shift = true
