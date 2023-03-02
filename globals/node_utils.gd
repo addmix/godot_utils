@@ -1,6 +1,6 @@
 class_name NodeUtils
 
-static func get_child_recursive(obj : Node) -> Array:
+static func get_descendants(obj : Node) -> Array:
 	var children : Array = obj.get_children()
 
 	#array for storing all descendants
@@ -9,7 +9,7 @@ static func get_child_recursive(obj : Node) -> Array:
 	for i in range(children.size()):
 		arr.append(children[i])
 		#add child's array contents to self's array
-		arr += get_child_recursive(children[i])
+		arr += get_descendants(children[i])
 
 	return arr
 
@@ -18,7 +18,7 @@ static func get_first_parent_which_is_a(obj : Node, type) -> Node:
 	var parent := obj.get_parent()
 	if parent == null:
 		return null
-	elif parent is type:
+	elif is_instance_of(parent, type):
 		return parent
 	else:
 		return get_first_parent_which_is_a(parent, type)
