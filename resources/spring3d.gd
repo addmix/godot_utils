@@ -55,7 +55,7 @@ func update(delta : float) -> void:
 	position = target + (direction * cosine + curve1 * sine) / e
 	velocity = frequency * ((curve * curve1 - damper * direction) * cosine - (curve * direction + damper * curve1) * sine) / e
 
-func apply_impulse(_impulse : Vector3, _position : Vector3) -> void:
+func apply_impulse(_impulse : Vector3) -> void:
 	accelerate(_impulse / mass)
 
 func accelerate(s : Vector3) -> void:

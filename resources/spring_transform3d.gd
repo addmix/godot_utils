@@ -28,14 +28,14 @@ func get_inverse_inertia_tensor() -> Basis:
 @export_group("")
 
 func get_class() -> String:
-	return "SpringRecoil"
+	return "SpringTransform3D"
 
 func update(delta : float) -> void:
 	position_spring.update(delta)
 	rotation_spring.update(delta)
 
 func apply_impulse(_impulse : Vector3, _position : Vector3) -> void:
-	position_spring.apply_impulse(_impulse / mass, _position)
+	position_spring.accelerate(_impulse / mass)
 
 	var torque : Vector3 = (_position - center_of_mass).cross(_impulse)
 	var torque_in_diagonal_space : Vector3 = inverse_inertia_tensor * torque

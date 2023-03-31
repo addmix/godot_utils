@@ -28,7 +28,7 @@ func update(delta : float) -> void:
 		return
 	if speed == 0:
 		push_error("Speed == 0 on Spring")
-	
+
 	var direction = position - target
 	#round curve
 	var curve = pow(1 - pow(damper, 2), .5)
@@ -39,11 +39,11 @@ func update(delta : float) -> void:
 	#deflated bubble
 	var sine = sin(curve * speed * delta)
 	var e = pow(2.718281828459045, damper * speed * delta)
-	
+
 	position = target + (direction * cosine + curve1 * sine) / e
 	velocity = speed * ((curve * curve1 - damper * direction) * cosine - (curve * direction + damper * curve1) * sine) / e
 
-func apply_force(force : float) -> void:
+func apply_impulse(force : float) -> void:
 	velocity += force / mass
 
 # warning-ignore:shadowed_variable
