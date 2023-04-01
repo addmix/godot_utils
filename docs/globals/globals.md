@@ -1,0 +1,15 @@
+# Global classes
+
+* [AlgorithmUtils](docs/globals/algorithm_utils.md)
+* [ArrayUtils](docs/globals/array_utils.md)
+* [FileUtils](docs/globals/file_utils.md)
+* [MathUtils](docs/globals/math_utils.md)
+* [NodeUtils](docs/globals/physics_utils.md)
+* [Physics2DUtils](docs/globals/physics2d_utils.md)
+* [Physics3DUtils](docs/globals/physics3d_utils.md)
+* [PluginUtils](docs/globals/plugin_utils.md)
+* [SettingsUtils](docs/globals/settings_utils.md)
+* [TransformUtils](docs/globals/transform_utils.md)
+* [UnitsUtils](docs/globals/unit_utils.md)
+* [Vector2Utils](docs/globals/vector2_utils.md)
+* [Vector3Utils](docs/globals/vector3_utils.md)
