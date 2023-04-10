@@ -6,7 +6,7 @@ A library of utility functions and nodes for the Godot game engine.
 2. The files can be placed anywhere inside your Godot project, but I suggest placing the entire `godot_utils` folder inside the `addons` folder.
 
 ## Documentation
-[Documentation](docs/SECTIONS.md)
+[Documentation](https://github.com/addmix/godot_utils/wiki/index)
 
 ## Usage
 
