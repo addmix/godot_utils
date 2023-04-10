@@ -11,7 +11,7 @@ const pid = preload("./resources/pid.gd")
 const spring = preload("./resources/spring.gd")
 const spring2d = preload("./resources/spring2d.gd")
 const spring3d = preload("./resources/spring3d.gd")
-const spring_transform = preload("./resources/spring_transform.gd")
+const spring_transform = preload("./resources/spring_transform3d.gd")
 
 #nodes/state_machine
 const state_machine = preload("./nodes/state_machine/state_machine.gd")
