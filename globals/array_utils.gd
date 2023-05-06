@@ -8,7 +8,8 @@ static func intersect(arr1 : Array, arr2 : Array) -> Array:
 	return _intersect
 
 static func difference(arr1 : Array, arr2 : Array) -> Array:
-	var _difference : Array = arr1.duplicate()
-	for i in arr2:
-		_difference.erase(i)
+	var _difference : Array = []
+	for i in arr1:
+		if !arr2.has(i):
+			_difference.append(i)
 	return _difference
