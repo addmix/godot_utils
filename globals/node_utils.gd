@@ -22,3 +22,12 @@ static func get_first_parent_which_is_a(obj : Node, type) -> Node:
 		return parent
 	else:
 		return get_first_parent_which_is_a(parent, type)
+
+static func get_first_parent_with_name(obj : Node, _name : String) -> Node:
+	var parent := obj.get_parent()
+	if parent == null:
+		return null
+	elif parent.name == _name:
+		return parent
+	else:
+		return get_first_parent_with_name(parent, _name)
