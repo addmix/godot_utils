@@ -3,7 +3,8 @@ A library of utility functions and nodes for the Godot game engine.
 
 ## Installation
 1. Download and un-zip files.
-2. The files can be placed anywhere inside your Godot project, but I suggest placing the entire `godot_utils` folder inside the `addons` folder.
+2. Place `godot_utils-main` or equivalent folder into your project's `addons` folder.
+3. Enable plugin in `Projects > Project Settings > Plugins`
 
 ## Documentation
 [Documentation](https://github.com/addmix/godot_utils/wiki/index)
