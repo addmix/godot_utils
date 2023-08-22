@@ -1,6 +1,8 @@
 @tool
 extends EditorPlugin
 
+var path : String = PluginUtils.get_plugin_path("Godot Utils")
+
 #icons
 const node_icon = preload("./icons/node.svg")
 const node2d_icon = preload("./icons/node2d.svg")
@@ -22,6 +24,8 @@ const vector_3d = preload("./nodes/3d/vector_3d/vector_3d.gd")
 const floating_origin = preload("./nodes/3d/floating_origin.gd")
 
 func _enter_tree() -> void:
+	add_autoload_singleton("PluginList", path + "/singletons/plugin_list.gd")
+	
 	#resources
 	add_custom_type("PID", "Resource", pid, node_icon)
 	add_custom_type("Spring", "Resource", spring, node_icon)
