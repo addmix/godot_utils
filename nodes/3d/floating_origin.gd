@@ -15,7 +15,7 @@ var global_offset : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	if has_node("/root/FloatingOriginHelper"):
-		FloatingOriginHelper.floating_origin = self
+		get_node("/root/FloatingOriginHelper").floating_origin = self
 
 func shift_origin(_position : Vector3) -> void:
 	#get closest cell
