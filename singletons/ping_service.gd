@@ -18,7 +18,7 @@ func _physics_process(delta : float) -> void:
 	receive_ping_dictionary.rpc(ping_dictionary)
 
 #called on host and client
-@rpc(call_local, any_peer, unreliable_ordered)
+@rpc("call_local", "any_peer", "unreliable_ordered")
 func _ping(server_time : int) -> void:
 	if multiplayer.get_remote_sender_id() != 1:
 		return
@@ -26,7 +26,7 @@ func _ping(server_time : int) -> void:
 	_pong.rpc_id(1, server_time)
 
 #called on host
-@rpc(call_local, any_peer, unreliable_ordered)
+@rpc("call_local", "any_peer", "unreliable_ordered")
 func _pong(returned_time : int) -> void:
 	var elapsed_time : float = float(Time.get_ticks_msec() - returned_time) / 2000.0
 	ping_dictionary[multiplayer.get_remote_sender_id()] = elapsed_time
@@ -34,13 +34,13 @@ func _pong(returned_time : int) -> void:
 
 #called on host and client
 #notify of pings
-@rpc(call_local, any_peer, unreliable_ordered)
+@rpc("call_local", "any_peer", "unreliable_ordered")
 func _receive_ping(received_ping : float) -> void:
 	if multiplayer.get_remote_sender_id() != 1:
 		return
 	ping = received_ping
 
-@rpc(call_local, any_peer, unreliable_ordered)
+@rpc("call_local", "any_peer", "unreliable_ordered")
 func receive_ping_dictionary(ping_dictionary : Dictionary) -> void:
 	if multiplayer.get_remote_sender_id() != 1:
 		return
