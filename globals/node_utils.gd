@@ -31,3 +31,10 @@ static func get_first_parent_with_name(obj : Node, _name : String) -> Node:
 		return parent
 	else:
 		return get_first_parent_with_name(parent, _name)
+
+#returns signal connection error, if any.
+static func connect_signal_safe(obj : Node, _signal : StringName, callable : Callable) -> int:
+	if !obj.has_signal(_signal):
+		return obj.connect(_signal, callable)
+	#mimick godot's default error for doubly connected signals
+	return ERR_INVALID_PARAMETER
