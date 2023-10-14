@@ -4,9 +4,10 @@ extends EditorPlugin
 var path : String = PluginUtils.get_plugin_path("Godot Utils")
 
 #icons
-const node_icon = preload("./icons/node.svg")
-const node2d_icon = preload("./icons/node2d.svg")
-const node3d_icon = preload("./icons/node3d.svg")
+const node_icon = preload("./icons/Node.svg")
+const node2d_icon = preload("./icons/Node2D.svg")
+const node3d_icon = preload("./icons/Node3D.svg")
+const area3d_icon = preload("./icons/Area3D.svg")
 
 func _enter_tree() -> void:
 	add_autoload_singleton("PluginList", path + "/singletons/plugin_list.gd")
@@ -26,6 +27,9 @@ func _enter_tree() -> void:
 	add_custom_type("Vector3D", "MeshInstance3D", preload("./nodes/3d/vector_3d/vector_3d.gd"), node3d_icon)
 	add_custom_type("FloatingOrigin", "Node3D", preload("./nodes/3d/floating_origin.gd"), node3d_icon)
 	add_custom_type("Thruster", "Marker3D", preload("./nodes/3d/thruster.gd"), node3d_icon)
+	
+	#nodes/3d/physics
+	add_custom_type("Area3DPreferredObjectPicker", "Area3D", preload("./nodes/3d/physics/area3d_preferred_object_picker.gd"), area3d_icon)
 
 func _exit_tree() -> void:
 	remove_custom_type("PID")
