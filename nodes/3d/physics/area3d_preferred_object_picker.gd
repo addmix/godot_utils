@@ -39,6 +39,7 @@ func _on_function_grab_body_exited(body : PhysicsBody3D) -> void:
 
 func _update_preferred_node() -> void:
 	if nodes_in_area.size() == 0:
+		preferred_node = null
 		return
 	
 	#choose the preferred node

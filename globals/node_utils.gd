@@ -32,9 +32,10 @@ static func get_first_parent_with_name(obj : Node, _name : String) -> Node:
 	else:
 		return get_first_parent_with_name(parent, _name)
 
-#returns signal connection error, if any.
-static func connect_signal_safe(obj : Node, _signal : StringName, callable : Callable) -> int:
-	if !obj.has_signal(_signal):
-		return obj.connect(_signal, callable)
+#returns signal connection error, if any. Mainly for plugin nodes
+static func connect_signal_safe(obj : Node, _signal : StringName, callable : Callable, flags : int = 0) -> int:
+	if not obj.has_signal(_signal):
+		return obj.connect(_signal, callable, flags)
 	#mimick godot's default error for doubly connected signals
+	push_warning("Signal already connected")
 	return ERR_INVALID_PARAMETER
