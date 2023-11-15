@@ -24,8 +24,14 @@ func _enter_tree() -> void:
 	add_custom_type("State", "Node", preload("./nodes/state_machine/state.gd"), node_icon)
 
 	#nodes/3d
+
 	add_custom_type("Vector3D", "MeshInstance3D", preload("./nodes/3d/vector_3d/vector_3d.gd"), node3d_icon)
 	add_custom_type("FloatingOrigin", "Node3D", preload("./nodes/3d/floating_origin.gd"), node3d_icon)
+	#floating origin settings
+	var enable_floating_origin_helper : bool = SettingsUtils.ifndef("godot_utils/floating_origin/enable_helper", false)
+	if enable_floating_origin_helper:
+		add_autoload_singleton("FloatingOriginHelper", "res://addons/godot_utils/singletons/floating_origin_helper.gd")
+	
 	add_custom_type("Thruster", "Marker3D", preload("./nodes/3d/thruster.gd"), node3d_icon)
 	
 	#nodes/3d/physics
@@ -42,3 +48,6 @@ func _exit_tree() -> void:
 	remove_custom_type("State")
 
 	remove_custom_type("Vector3D")
+	
+	if has_node("/root/FloatingOriginHelper"):
+		remove_autoload_singleton("FloatingOriginHelper")
