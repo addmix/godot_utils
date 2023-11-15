@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 class_name FloatingOrigin
 
@@ -12,6 +13,9 @@ var _can_shift : bool = true
 #current chunks of offset
 var current_offset : Vector3i = Vector3i.ZERO
 var global_offset : Vector3 = Vector3.ZERO
+
+@export_group("Editor")
+@export var can_shift_in_editor : bool = false
 
 func _ready() -> void:
 	if has_node("/root/FloatingOriginHelper"):
@@ -37,6 +41,9 @@ func shift_origin(_position : Vector3) -> void:
 	origin_shifted.emit(Vector3(change_in_cells) * shift_threshold)
 
 func _physics_process(delta: float) -> void:
+	if not (Engine.is_editor_hint() and can_shift_in_editor):
+		return
+	
 	if disabled:
 		return
 	var current_camera : Camera3D = get_viewport().get_camera_3d()

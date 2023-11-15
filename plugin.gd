@@ -10,7 +10,15 @@ const node3d_icon = preload("./icons/Node3D.svg")
 const area3d_icon = preload("./icons/Area3D.svg")
 
 func _enter_tree() -> void:
-	add_autoload_singleton("PluginList", path + "/singletons/plugin_list.gd")
+	#plugin list settings
+	var enable_plugin_list : bool = SettingsUtils.ifndef("godot_utils/plugin_list/enable", false)
+	if enable_plugin_list:
+		add_autoload_singleton("PluginList", path + "/singletons/plugin_list.gd")
+	
+	#floating origin settings
+	var enable_floating_origin_helper : bool = SettingsUtils.ifndef("godot_utils/floating_origin/enable_helper", false)
+	if enable_floating_origin_helper:
+		add_autoload_singleton("FloatingOriginHelper", "res://addons/godot_utils/singletons/floating_origin_helper.gd")
 	
 	#resources
 	add_custom_type("PID", "Resource", preload("./resources/pid.gd"), node_icon)
@@ -24,8 +32,11 @@ func _enter_tree() -> void:
 	add_custom_type("State", "Node", preload("./nodes/state_machine/state.gd"), node_icon)
 
 	#nodes/3d
+
 	add_custom_type("Vector3D", "MeshInstance3D", preload("./nodes/3d/vector_3d/vector_3d.gd"), node3d_icon)
 	add_custom_type("FloatingOrigin", "Node3D", preload("./nodes/3d/floating_origin.gd"), node3d_icon)
+	
+	
 	add_custom_type("Thruster", "Marker3D", preload("./nodes/3d/thruster.gd"), node3d_icon)
 	
 	#nodes/3d/physics
@@ -42,3 +53,9 @@ func _exit_tree() -> void:
 	remove_custom_type("State")
 
 	remove_custom_type("Vector3D")
+	
+	if has_node("/root/PluginList"):
+		remove_autoload_singleton("PluginList")
+	
+	if has_node("/root/FloatingOriginHelper"):
+		remove_autoload_singleton("FloatingOriginHelper")

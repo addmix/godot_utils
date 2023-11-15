@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 var floating_origin : FloatingOrigin
