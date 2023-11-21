@@ -41,7 +41,7 @@ func shift_origin(_position : Vector3) -> void:
 	origin_shifted.emit(Vector3(change_in_cells) * shift_threshold)
 
 func _physics_process(delta: float) -> void:
-	if not (Engine.is_editor_hint() and can_shift_in_editor):
+	if Engine.is_editor_hint() and not can_shift_in_editor:
 		return
 	
 	if disabled:
