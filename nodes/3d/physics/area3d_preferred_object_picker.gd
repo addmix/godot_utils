@@ -2,7 +2,7 @@ extends Area3D
 class_name Area3DPreferredObjectPicker
 
 var nodes_in_area : Array = []
-var preferred_node : PhysicsBody3D = null
+var preferred_node : Node3D = null
 
 #these don't handle being changed after initialization
 @export var pick_areas : bool = true
@@ -28,11 +28,11 @@ func _on_function_grab_area_exited(area : Area3D) -> void:
 		nodes_in_area.erase(area)
 		_update_preferred_node()
 
-func _on_function_grab_body_entered(body : PhysicsBody3D) -> void:
+func _on_function_grab_body_entered(body : Node3D) -> void:
 	nodes_in_area.push_back(body)
 	_update_preferred_node()
 
-func _on_function_grab_body_exited(body : PhysicsBody3D) -> void:
+func _on_function_grab_body_exited(body : Node3D) -> void:
 	if nodes_in_area.find(body) != -1:
 		nodes_in_area.erase(body)
 		_update_preferred_node()
@@ -48,7 +48,7 @@ func _update_preferred_node() -> void:
 		preferred_node = _choose_preferred_node(node, new_preferred_node)
 
 #if there is no preference between node a and node b, node b is returned
-func _choose_preferred_node(node_a : CollisionObject3D, node_b : CollisionObject3D) -> CollisionObject3D:
+func _choose_preferred_node(node_a : Node3D, node_b : Node3D) -> Node3D:
 	var distance_a : float = global_transform.origin.distance_squared_to(node_a.global_transform.origin)
 	var distance_b : float = global_transform.origin.distance_squared_to(node_b.global_transform.origin)
 	if distance_a < distance_b:
