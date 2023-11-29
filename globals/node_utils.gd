@@ -1,5 +1,11 @@
 class_name NodeUtils
 
+static func has_node_of_type(node : Node, type) -> bool:
+	for child in node.get_children():
+		if is_instance_of(child, type):
+			return true
+	return false
+
 static func get_descendants(node : Node, include_internal : bool = false) -> Array[Node]:
 	var children : Array[Node] = node.get_children(include_internal)
 
@@ -13,14 +19,20 @@ static func get_descendants(node : Node, include_internal : bool = false) -> Arr
 
 	return arr
 
-static func get_first_parent_which_is_a(node : Node, type) -> Node:
+static func get_first_child_of_type(node : Node, type) -> Node:
+	for child in node.get_children():
+		if is_instance_of(child, type):
+			return child
+	return null
+
+static func get_first_parent_of_type(node : Node, type) -> Node:
 	var parent := node.get_parent()
 	if parent == null:
 		return null
 	elif is_instance_of(parent, type):
 		return parent
 	else:
-		return get_first_parent_which_is_a(parent, type)
+		return get_first_parent_of_type(parent, type)
 
 static func get_first_parent_with_name(node : Node, _name : String) -> Node:
 	var parent := node.get_parent()
