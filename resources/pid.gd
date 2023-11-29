@@ -1,3 +1,4 @@
+@tool
 extends Resource
 class_name PID
 
@@ -20,6 +21,8 @@ func _init(_p : float = p, _i : float = i, _d : float = d) -> void:
 	self.p = _p
 	self.i = _i
 	self.d = _d
+	
+	resource_local_to_scene = true
 
 func update(delta : float, error : float) -> float:
 	var derivative : float = (error - _last_error) / delta
