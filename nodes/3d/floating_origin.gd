@@ -6,6 +6,7 @@ signal pre_origin_shift
 signal origin_shifted
 
 @export var disabled : bool = false
+@export var disable_y_shift : bool = false
 @export var shift_threshold : float = 1024.0
 @export var shift_cooldown : float = 5.0
 var _can_shift : bool = true
@@ -33,7 +34,10 @@ func shift_origin(_position : Vector3) -> void:
 	change_in_cells.y = int(_position.y) / int(shift_threshold)
 	@warning_ignore("integer_division")
 	change_in_cells.z = int(_position.z) / int(shift_threshold)
-
+	
+	if disable_y_shift:
+		change_in_cells.y = 0
+	
 	pre_origin_shift.emit(Vector3(change_in_cells) * shift_threshold)
 
 	#we'll see how well shifting the root node only will work
