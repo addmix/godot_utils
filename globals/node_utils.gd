@@ -43,6 +43,19 @@ static func get_first_parent_with_name(node : Node, _name : String) -> Node:
 	else:
 		return get_first_parent_with_name(parent, _name)
 
+static func get_first_descandant_of_type(node : Node, type, include_internal : bool = false) -> Node:
+	if is_instance_of(node, type):
+		return node
+	
+	for child in node.get_children(include_internal):
+		#returns node or null
+		var descendant : Node = get_first_descandant_of_type(child, type, include_internal)
+		#if not null, we have found a match
+		if descendant:
+			return descendant
+	
+	return null
+
 static func get_descendants_of_type(node : Node, type, include_internal : bool = false) -> Array[Node]:
 	var descandants_of_type : Array[Node] = []
 	for child in node.get_children(include_internal):
