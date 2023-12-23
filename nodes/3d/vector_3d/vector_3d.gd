@@ -101,3 +101,5 @@ func _init(_color : Color = Color(), _width : float = 0.1) -> void:
 
 	st.generate_normals()
 	mesh = st.commit()
+	
+	custom_aabb = AABB(Vector3.ZERO, Vector3(100, 100, 100))
