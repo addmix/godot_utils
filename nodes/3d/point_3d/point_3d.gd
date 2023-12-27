@@ -1,22 +1,7 @@
 @tool
 extends MeshInstance3D
-class_name Vector3D
+class_name Point3D
 
-@export var value := Vector3.ZERO:
-	set(x):
-		value = x
-		material.set_shader_parameter("_length", value.length())
-
-		#this bit just prevents errors of parallel and zero values
-		var length_squared := value.length_squared()
-		if is_equal_approx((transform.origin - value).length_squared(), 0.0) or length_squared == 0.0:
-			return
-		var up = Vector3(0, 1, 0)
-		var dot := value.dot(up)
-		var dot_squared := dot * dot
-		if is_equal_approx(dot_squared, length_squared):
-			up = Vector3(1, 0, 0)
-		transform = transform.looking_at(value, up)
 @export var color := Color(1, 1, 1):
 	set(x):
 		color = x
@@ -25,7 +10,7 @@ class_name Vector3D
 	set(x):
 		width = x
 		material.set_shader_parameter("_width", width)
-@export var checker := false:
+@export var checker := true:
 	set(x):
 		checker = x
 		material.set_shader_parameter("checker_pattern", checker)
@@ -59,8 +44,10 @@ Vector3(0, 1, 0)] #index 5 top point
 #534
 #541
 
-func _init(_color : Color = Color(), _width : float = 0.1, _checker : bool = false) -> void:
-	material.shader = preload("./vector_3d.gdshader")
+
+
+func _init(_color : Color = Color(), _width : float = 0.1, _checker : bool = true) -> void:
+	material.shader = preload("./point_3d.gdshader")
 	material.render_priority = 100
 	
 	color = _color
@@ -72,14 +59,15 @@ func _init(_color : Color = Color(), _width : float = 0.1, _checker : bool = fal
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	st.set_material(material)
 	#bottom 4 triangles
+	#northeast
 	st.add_vertex(_verticies[0])
 	st.add_vertex(_verticies[2])
 	st.add_vertex(_verticies[1])
-
+	#southeast
 	st.add_vertex(_verticies[0])
 	st.add_vertex(_verticies[3])
 	st.add_vertex(_verticies[2])
-
+	#southwest
 	st.add_vertex(_verticies[0])
 	st.add_vertex(_verticies[4])
 	st.add_vertex(_verticies[3])

@@ -33,10 +33,9 @@ func _enter_tree() -> void:
 
 	#nodes/3d
 
+	add_custom_type("Point3D", "MeshInstance3D", preload("./nodes/3d/point_3d/point_3d.gd"), node3d_icon)
 	add_custom_type("Vector3D", "MeshInstance3D", preload("./nodes/3d/vector_3d/vector_3d.gd"), node3d_icon)
 	add_custom_type("FloatingOrigin", "Node3D", preload("./nodes/3d/floating_origin.gd"), node3d_icon)
-	
-	
 	add_custom_type("Thruster", "Marker3D", preload("./nodes/3d/thruster.gd"), node3d_icon)
 	
 	#nodes/3d/physics
@@ -52,7 +51,12 @@ func _exit_tree() -> void:
 	remove_custom_type("StateMachine")
 	remove_custom_type("State")
 
+	remove_custom_type("Point3D")
 	remove_custom_type("Vector3D")
+	remove_custom_type("FloatingOrigin")
+	remove_custom_type("Thruster")
+	
+	remove_custom_type("Area3DPreferredObjectPicker")
 	
 	if has_node("/root/PluginList"):
 		remove_autoload_singleton("PluginList")

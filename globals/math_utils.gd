@@ -45,6 +45,8 @@ static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
 static func sigmoid(x : float, e : float = E) -> float:
 	return pow(e, x) / pow(e, x) + 1.0
 
+static func log_with_base(value : float, base : float) -> float:
+	return log(value) / log(base)
 
 
 #matrix math stuff, very inefficient stuff
