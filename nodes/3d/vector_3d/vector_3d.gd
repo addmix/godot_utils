@@ -17,14 +17,18 @@ class_name Vector3D
 		if is_equal_approx(dot_squared, length_squared):
 			up = Vector3(1, 0, 0)
 		transform = transform.looking_at(value, up)
-@export var width := 0.1:
-	set(x):
-		width = x
-		material.set_shader_parameter("_width", width)
 @export var color := Color(1, 1, 1):
 	set(x):
 		color = x
 		material.set_shader_parameter("_color", color)
+@export var width := 0.1:
+	set(x):
+		width = x
+		material.set_shader_parameter("_width", width)
+@export var checker := false:
+	set(x):
+		checker = x
+		material.set_shader_parameter("checker_pattern", checker)
 
 var material := ShaderMaterial.new()
 
@@ -55,11 +59,13 @@ Vector3(0, 1, 0)] #index 5 top point
 #534
 #541
 
-func _init(_color : Color = Color(), _width : float = 0.1) -> void:
+func _init(_color : Color = Color(), _width : float = 0.1, _checker : bool = false) -> void:
 	material.shader = preload("./vector_3d.gdshader")
 	material.render_priority = 100
+	
 	color = _color
 	width = _width
+	checker = _checker
 
 	var st := SurfaceTool.new()
 
