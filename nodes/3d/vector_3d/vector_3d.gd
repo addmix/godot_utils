@@ -7,15 +7,20 @@ class_name Vector3D
 		value = x
 		material.set_shader_parameter("_length", value.length())
 
-		#this bit just prevents errors of parallel and zero values
+		#prevent error when value is 0
 		var length_squared := value.length_squared()
-		if is_equal_approx((transform.origin - value).length_squared(), 0.0) or length_squared == 0.0:
+		if is_equal_approx(length_squared, 0.0):
+			#reset rotation
+			basis = Basis()
 			return
+		
 		var up = Vector3(0, 1, 0)
 		var dot := value.dot(up)
 		var dot_squared := dot * dot
+		
 		if is_equal_approx(dot_squared, length_squared):
 			up = Vector3(1, 0, 0)
+		
 		transform = transform.looking_at(value, up)
 @export var color := Color(1, 1, 1):
 	set(x):
