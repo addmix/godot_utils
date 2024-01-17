@@ -47,11 +47,11 @@ func _update_preferred_node() -> void:
 	for node in nodes_in_area:
 		preferred_node = _choose_preferred_node(node, new_preferred_node)
 
-#if there is no preference between node a and node b, node b is returned
+#if there is no preference between node a and node b, node a is returned
 func _choose_preferred_node(node_a : Node3D, node_b : Node3D) -> Node3D:
 	var distance_a : float = global_transform.origin.distance_squared_to(node_a.global_transform.origin)
 	var distance_b : float = global_transform.origin.distance_squared_to(node_b.global_transform.origin)
-	if distance_a < distance_b:
+	if distance_a <= distance_b:
 		return node_a
 	else:
 		return node_b

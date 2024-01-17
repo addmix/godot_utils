@@ -23,32 +23,6 @@ static func get_files_in_directory(path : String) -> PackedStringArray:
 	dir.list_dir_end()
 	return files
 
-static func find_files_of_type(path : String, type : String) -> PackedStringArray:
-	var files : PackedStringArray = []
-
-	var dir := DirAccess.open(path)
-
-	dir.set_include_hidden(true)
-	dir.list_dir_begin()
-	var val
-
-	while(val != ""):
-		#gets next file in directory
-		val = dir.get_next()
-
-		#empty string signifies end of directory
-		if val == "":
-			break
-
-		var subs = val.split(".")
-
-		#if file extension is of desired type
-		if subs[1] == type:
-			files.append(path + "/" + val)
-
-	dir.list_dir_end()
-	return files
-
 static func find_file_of_type(path : String, type : String) -> String:
 	var dir := DirAccess.open(path)
 
@@ -74,6 +48,32 @@ static func find_file_of_type(path : String, type : String) -> String:
 				return(path + "/" + val)
 
 	return ""
+
+static func find_files_of_type(path : String, type : String) -> PackedStringArray:
+	var files : PackedStringArray = []
+
+	var dir := DirAccess.open(path)
+
+	dir.set_include_hidden(true)
+	dir.list_dir_begin()
+	var val
+
+	while(val != ""):
+		#gets next file in directory
+		val = dir.get_next()
+
+		#empty string signifies end of directory
+		if val == "":
+			break
+
+		var subs = val.split(".")
+
+		#if file extension is of desired type
+		if subs[1] == type:
+			files.append(path + "/" + val)
+
+	dir.list_dir_end()
+	return files
 
 #loads config file as dictionary
 static func load_dictionary_from_config_file(path : String) -> Dictionary:

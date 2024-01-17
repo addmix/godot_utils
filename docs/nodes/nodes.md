@@ -1,8 +1,12 @@
 # Nodes
 * [3D](3d)
 	* [FloatingOrigin](3d/floating_origin.md)
-	* [Vector3D](3d/vector_3d.md)
+	* Physics
+		* [Area3DPreferredObjectPicker](3d/physics/area3d_preferred_object_picker.md)
+		* [Thruster](3d/physics/thruster.md)
 	* [ValueDisplay](3d/value_display/value_display.md)
 		* [Dial](3d/value_display/dial/dial.md)
+		* [Point3D](3d/value_display/point_3d.md)
+		* [Vector3D](3d/value_display/vector_3d.md)
 * [StateMachine](state_machine/state_machine.md)
 	* [State](state_machine/state.md)

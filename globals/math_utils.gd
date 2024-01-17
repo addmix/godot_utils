@@ -26,6 +26,9 @@ static func bias(x : float, bias : float) -> float:
 static func float_toggle(condition : bool, _true : float, _false : float) -> float:
 	return float(condition) * _true + float(!condition) * _false
 
+static func log_with_base(value : float, base : float) -> float:
+	return log(value) / log(base)
+
 static func mix(a : float, b : float, amount : float) -> float:
 	return (a - amount) * a + amount * b
 
@@ -45,8 +48,7 @@ static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
 static func sigmoid(x : float, e : float = E) -> float:
 	return pow(e, x) / pow(e, x) + 1.0
 
-static func log_with_base(value : float, base : float) -> float:
-	return log(value) / log(base)
+
 
 
 #matrix math stuff, very inefficient stuff

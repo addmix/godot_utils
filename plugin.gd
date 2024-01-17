@@ -33,10 +33,10 @@ func _enter_tree() -> void:
 
 	#nodes/3d
 
-	add_custom_type("Point3D", "MeshInstance3D", preload("./nodes/3d/point_3d/point_3d.gd"), node3d_icon)
-	add_custom_type("Vector3D", "MeshInstance3D", preload("./nodes/3d/vector_3d/vector_3d.gd"), node3d_icon)
+	add_custom_type("Point3D", "MeshInstance3D", preload("./nodes/3d/value_display/point_3d/point_3d.gd"), node3d_icon)
+	add_custom_type("Vector3D", "MeshInstance3D", preload("./nodes/3d/value_display/vector_3d/vector_3d.gd"), node3d_icon)
 	add_custom_type("FloatingOrigin", "Node3D", preload("./nodes/3d/floating_origin.gd"), node3d_icon)
-	add_custom_type("Thruster", "Marker3D", preload("./nodes/3d/thruster.gd"), node3d_icon)
+	add_custom_type("Thruster", "Marker3D", preload("./nodes/3d/physics/thruster.gd"), node3d_icon)
 	
 	#nodes/3d/physics
 	add_custom_type("Area3DPreferredObjectPicker", "Area3D", preload("./nodes/3d/physics/area3d_preferred_object_picker.gd"), area3d_icon)

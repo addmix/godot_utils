@@ -10,6 +10,7 @@
 ### `float` functions.
 * `bias(x : float, bias : float) -> float` Biases the value `x` according to the bias factor `bias`.
 * `float_toggle(condition : bool, _true : float, _false : float) -> float` Branchless toggle function for floats. Returns `_true` or `_false` depending on `condition` without branching. See `toggle()`
+* `log_with_base(value : float, base : float) -> float` Typical logarithm function. Takes a value, and a logarithmic base.
 * `mix(a : float, b : float, amount : float) -> float` Mix operation.
 * `move_to(position : float, target : float, speed : float = 1.0) -> float` Deprecated, use GDScript global `move_toward()` function instead. Moves `position` towards `target` by `speed` amount without overshoot.
 * `polynomial_smin(a : float, b : float, k : float = 0.1) -> float` Performs the polynomial smooth minimum operation between `a` and `b` by factor `k`.

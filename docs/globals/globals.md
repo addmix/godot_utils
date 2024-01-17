@@ -2,9 +2,10 @@
 
 * [AlgorithmUtils](algorithm_utils.md)
 * [ArrayUtils](array_utils.md)
+* [ComputeShaderUtils](compute_shader_utils.md)
 * [FileUtils](file_utils.md)
 * [MathUtils](math_utils.md)
-* [NodeUtils](physics_utils.md)
+* [NodeUtils](node_utils.md)
 * [Physics2DUtils](physics2d_utils.md)
 * [Physics3DUtils](physics3d_utils.md)
 * [PluginUtils](plugin_utils.md)

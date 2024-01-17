@@ -4,10 +4,10 @@ class_name Physics3DUtils
 func get_point_velocity(node : PhysicsBody3D, relative_position : Vector3) -> Vector3:
 	return node.linear_velocity + node.angular_velocity.cross(relative_position - node.center_of_mass);
 
-static func true_proportional_navigation(proportionality_constant : float, closing_velocity : float, los_rate : Vector2) -> Vector2:
+static func true_proportional_navigation(los_rate : Vector2, closing_velocity : float, proportionality_constant : float = 4.0) -> Vector2:
 	return proportionality_constant * closing_velocity * los_rate
 
-static func augmented_proportional_navigation(proportionality_constant : float, closing_velocity : float, los_rate : Vector2, normal_acceleration : float, los_delta : Vector2) -> Vector2:
+static func augmented_proportional_navigation(los_rate : Vector2, closing_velocity : float, normal_acceleration : float, los_delta : Vector2, proportionality_constant : float = 4.0) -> Vector2:
 	var tpn := true_proportional_navigation(proportionality_constant, closing_velocity, los_rate)
 	return tpn + los_delta * normal_acceleration * (proportionality_constant / 2.0)
 #	Vector2(tpn.x + (proportionality_constant * normal_acceleration) / 2.0, tpn.y + (proportionality_constant * normal_acceleration) / 2.0)#

@@ -33,9 +33,9 @@ static func get_plugin_dictionary() -> Dictionary:
 	return plugin_dictionary
 
 #very slow, use sparingly.
-static func get_plugin_path(plugin : String) -> String:
+static func get_plugin_path(plugin_name : String) -> String:
 	var dictionary := get_plugin_dictionary()
-	if not dictionary.has(plugin):
+	if not dictionary.has(plugin_name):
 		push_error("Plugin name not found in plugin dictionary.")
-	return dictionary[plugin]["path"]
+	return dictionary[plugin_name ]["path"]
 

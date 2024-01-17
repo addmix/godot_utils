@@ -1,16 +1,5 @@
 class_name ComputeShaderUtils
 
-#compute shader memory is in block of 16 bytes, and it is necessary to
-static func extend_byte_array_to_memory_block(byte_array : PackedByteArray) -> PackedByteArray:
-	var filler_bytes := PackedByteArray([])
-	var remainder_bytes : int = byte_array.size() % 16
-	if remainder_bytes == 0:
-		return byte_array
-	var bytes_to_fill : int = 16 - remainder_bytes
-	for i in bytes_to_fill:
-		byte_array.append(0)
-	return byte_array
-
 static func convert_array_to_bytes(array : Array) -> PackedByteArray:
 	var bytes := PackedByteArray([])
 	for item in array:
@@ -38,3 +27,14 @@ static func convert_array_to_bytes(array : Array) -> PackedByteArray:
 
 	bytes = extend_byte_array_to_memory_block(bytes)
 	return bytes
+
+#compute shader memory is in block of 16 bytes, and it is necessary to
+static func extend_byte_array_to_memory_block(byte_array : PackedByteArray) -> PackedByteArray:
+	var filler_bytes := PackedByteArray([])
+	var remainder_bytes : int = byte_array.size() % 16
+	if remainder_bytes == 0:
+		return byte_array
+	var bytes_to_fill : int = 16 - remainder_bytes
+	for i in bytes_to_fill:
+		byte_array.append(0)
+	return byte_array
