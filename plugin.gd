@@ -4,9 +4,9 @@ extends EditorPlugin
 var path : String = PluginUtils.get_plugin_path("Godot Utils")
 
 #icons
-const node_icon = preload("./icons/Node.svg")
-const node2d_icon = preload("./icons/Node2D.svg")
-const node3d_icon = preload("./icons/Node3D.svg")
+const node_icon = preload("./icons/node.svg")
+const node2d_icon = preload("./icons/node2d.svg")
+const node3d_icon = preload("./icons/node3d.svg")
 const area3d_icon = preload("./icons/Area3D.svg")
 
 func _enter_tree() -> void:
