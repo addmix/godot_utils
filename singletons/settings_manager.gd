@@ -1,4 +1,32 @@
+@tool
 extends Node
+
+
+
+# Intended Usage:
+#
+# First, enable this singleton in project settings with by setting "godot_utils/settings_manager/enabled_settings_manager"
+# to true.
+#
+# Add a line similar to this to any script that you would like to have updated settings: (static typing optional)
+# var my_var : float = SettingsManager.register_setting(self, "my_setting/in/project_settings", func(x): my_var = x, 15.0)
+#
+# my_var will be initialized to the value of "my_setting/in/project_settings" in ProjectSettings
+# (if available), or the passed default value, in this case, 15.0
+#
+# Then, you can change a setting with SettingsManager.set_setting("my_setting/in/project_settings", 20.0)
+# which will then change the value for all scripts that have called SettingsManager.register_setting
+# for that setting.
+#
+# SettingsManager.set_setting() does not save values in ProjectSettings, so if you wish for settings
+# to appear in ProjectSettings, be sure to call ProjectSettings.save() (for in-editor), or
+# ProjectSettings.save_custom("override.cfg") (for in-game)
+#
+# ProjectSettings changed outside of SettingsManager.set_setting() are not automatically replicated,
+# so it is safe to change settings with ProjectSettings, but you must call SettingsManager.set_setting()
+# if you wish to update those settings at runtime.
+
+
 
 #used to check which objects are registered for the given setting
 #{setting_name : {object : setter}}
@@ -47,3 +75,4 @@ func set_setting(setting_name : String, value : Variant) -> void:
 	#update all registered settings
 	for setter : Callable in registered_settings[setting_name].values():
 		setter.call(value)
+	
