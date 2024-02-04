@@ -20,6 +20,10 @@ func _enter_tree() -> void:
 	if enable_floating_origin_helper:
 		add_autoload_singleton("FloatingOriginHelper", "res://addons/godot_utils/singletons/floating_origin_helper.gd")
 	
+	var enable_settings_manager : bool = SettingsUtils.ifndef("godot_utils/settings_manager/enabled_settings_manager", false)
+	if enable_floating_origin_helper:
+		add_autoload_singleton("SettingsManager", "res://addons/godot_utils/singletons/settings_manager.gd")
+	
 	#resources
 	add_custom_type("PID", "Resource", preload("./resources/pid.gd"), node_icon)
 	add_custom_type("Spring", "Resource", preload("./resources/spring.gd"), node_icon)
