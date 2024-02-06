@@ -15,6 +15,9 @@ static func distance_manhattan(a : Vector2, b : Vector2) -> float:
 static func distance_chebyshev(a : Vector2, b : Vector2) -> float:
 	return max(abs(a.x - b.x), abs(a.y - b.y))
 
+static func is_clockwise(a : Vector2, b : Vector2, c : Vector2) -> bool:
+	return (a - b).cross(a - c) > 0
+
 static func move_toward(position : Vector2, target : Vector2, delta : float = 1.0) -> Vector2:
 	var direction : Vector2 = target - position
 	var distance_squared : float = direction.length_squared()
