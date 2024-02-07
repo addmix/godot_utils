@@ -8,7 +8,7 @@ static func true_proportional_navigation(los_rate : Vector2, closing_velocity : 
 	return proportionality_constant * closing_velocity * los_rate
 
 static func augmented_proportional_navigation(los_rate : Vector2, closing_velocity : float, normal_acceleration : float, los_delta : Vector2, proportionality_constant : float = 4.0) -> Vector2:
-	var tpn := true_proportional_navigation(proportionality_constant, closing_velocity, los_rate)
+	var tpn := true_proportional_navigation(los_rate, closing_velocity, proportionality_constant)
 	return tpn + los_delta * normal_acceleration * (proportionality_constant / 2.0)
 #	Vector2(tpn.x + (proportionality_constant * normal_acceleration) / 2.0, tpn.y + (proportionality_constant * normal_acceleration) / 2.0)#
 
