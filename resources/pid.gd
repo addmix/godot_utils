@@ -14,7 +14,11 @@ class_name PID
 var output : float = 0
 
 var _last_error : float
-var _integral : float
+var _integral_error : float
+
+var proportional_output : float = 0.0
+var integral_output : float = 0.0
+var derivative_output : float = 0.0
 
 func _init(_p : float = p, _i : float = i, _d : float = d) -> void:
 	self.p = _p
@@ -23,9 +27,13 @@ func _init(_p : float = p, _i : float = i, _d : float = d) -> void:
 
 func update(delta : float, error : float) -> float:
 	var derivative : float = (error - _last_error) / delta
-	_integral += error * delta
-	_integral = MathUtils.float_toggle(clamp_integral, clamp(_integral, min_integral, max_integral), _integral)
+	_integral_error += error * delta
+	_integral_error = MathUtils.float_toggle(clamp_integral, clamp(_integral_error, min_integral, max_integral), _integral_error)
 	_last_error = error
-
-	output = p * error + i * _integral + d * derivative
+	
+	proportional_output = p * error
+	integral_output = i * _integral_error
+	derivative_output = d * derivative
+	
+	output = proportional_output + integral_output + derivative_output
 	return output
