@@ -1,11 +1,12 @@
 class_name NodeUtils
 
 #returns signal connection error, if any. Mainly for plugin nodes
-static func connect_signal_safe(node : Node, _signal : StringName, callable : Callable, flags : int = 0) -> int:
+static func connect_signal_safe(node : Node, _signal : StringName, callable : Callable, flags : int = 0, silence_warning : bool = false) -> int:
 	if not node.has_signal(_signal):
 		return node.connect(_signal, callable, flags)
 	#mimick godot's default error for doubly connected signals
-	push_warning("Signal already connected")
+	if not silence_warning:
+		push_warning("Signal already connected")
 	return ERR_INVALID_PARAMETER
 
 
