@@ -26,6 +26,8 @@ func _enter_tree() -> void:
 	
 	#resources
 	add_custom_type("PID", "Resource", preload("./resources/pid.gd"), node_icon)
+	add_custom_type("PIDVector2", "Resource", preload("./resources/pid_vector2.gd"), node_icon)
+	add_custom_type("PIDVector3", "Resource", preload("./resources/pid_vector3.gd"), node_icon)
 	add_custom_type("Spring", "Resource", preload("./resources/spring.gd"), node_icon)
 	add_custom_type("Spring2D", "Resource", preload("./resources/spring2d.gd"), node2d_icon)
 	add_custom_type("Spring3D", "Resource", preload("./resources/spring3d.gd"), node3d_icon)
@@ -47,6 +49,8 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	remove_custom_type("PID")
+	remove_custom_type("PIDVector2")
+	remove_custom_type("PIDVector3")
 	remove_custom_type("Spring")
 	remove_custom_type("Spring2D")
 	remove_custom_type("Spring3D")
