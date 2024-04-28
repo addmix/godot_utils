@@ -9,7 +9,7 @@ static func quat_to_axis_angle(quat : Quaternion) -> Vector4:
 	var angle = 2.0 * acos(quat.w)
 	axis_angle.w = sqrt(1 - quat.w * quat.w) #assuming quaternion normalised then w is less than 1, so term always positive.
 
-	if axis_angle.w < 0.00001: #test to avoid divide by zero, s is always positive due to sqrt
+	if is_equal_approx(axis_angle.w, 0.0): #test to avoid divide by zero, s is always positive due to sqrt
 		axis_angle.x = quat.x
 		axis_angle.y = quat.y
 		axis_angle.z = quat.z
