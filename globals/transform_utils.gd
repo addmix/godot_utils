@@ -1,7 +1,7 @@
 class_name TransformUtils
 
-static func quat_to_axis_angle(quat : Quaternion) -> Quaternion:
-	var axis_angle := Quaternion(0, 0, 0, 0)
+static func quat_to_axis_angle(quat : Quaternion) -> Vector4:
+	var axis_angle := Vector4(0, 0, 0, 0)
 
 	if quat.w > 1: #if w>1 acos and sqrt will produce errors, this cant happen if quaternion is normalised
 		quat = quat.normalized()
