@@ -42,6 +42,7 @@ func _enter_tree() -> void:
 	add_custom_type("Point3D", "MeshInstance3D", preload("./nodes/3d/value_display/point_3d/point_3d.gd"), node3d_icon)
 	add_custom_type("Vector3D", "MeshInstance3D", preload("./nodes/3d/value_display/vector_3d/vector_3d.gd"), node3d_icon)
 	add_custom_type("FloatingOrigin", "Node3D", preload("./nodes/3d/floating_origin.gd"), node3d_icon)
+	add_custom_type("FloatingOriginTopLevelFix", "Node", preload("./nodes/3d/floating_origin_top_level_fix.gd"), node_icon)
 	add_custom_type("Thruster", "Marker3D", preload("./nodes/3d/physics/thruster.gd"), node3d_icon)
 	
 	#nodes/3d/physics
@@ -62,6 +63,7 @@ func _exit_tree() -> void:
 	remove_custom_type("Point3D")
 	remove_custom_type("Vector3D")
 	remove_custom_type("FloatingOrigin")
+	remove_custom_type("FloatingOriginTopLevelFix")
 	remove_custom_type("Thruster")
 	
 	remove_custom_type("Area3DPreferredObjectPicker")

@@ -2,8 +2,8 @@
 extends Node3D
 class_name FloatingOrigin
 
-signal pre_origin_shift
-signal origin_shifted
+signal pre_origin_shift(shift : Vector3)
+signal origin_shifted(shift : Vector3)
 
 @export var disabled : bool = false
 @export var disable_y_shift : bool = false
