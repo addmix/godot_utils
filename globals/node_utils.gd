@@ -18,7 +18,7 @@ static func get_descendants(node : Node, include_internal : bool = false) -> Arr
 	var children : Array[Node] = node.get_children(include_internal)
 
 	#array for storing all descendants
-	var arr := []
+	var arr : Array[Node] = []
 
 	for i in range(children.size()):
 		arr.append(children[i])
