@@ -4,6 +4,10 @@ func check_dependencies() -> void:
 
 	pass
 
+#wip
+static func get_enabled_plugins() -> Array:
+	return ProjectSettings["editor_plugins/enabled"]
+
 static func get_plugin_list() -> Array:
 	var plugins := []
 	for directory in DirAccess.get_directories_at("res://addons"):
