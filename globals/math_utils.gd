@@ -40,6 +40,11 @@ static func move_to(position : float, target : float, speed : float = 1.0) -> fl
 
 	return float_toggle(direction == new_direction, new_position, target)
 
+static func number_is_divisible_with_tolerance(number : float, multiple : float, tolerance : float) -> bool:
+	var multiple_of_32 = number / multiple 
+	var absolute_difference : float = abs(multiple_of_32 - round(multiple_of_32)) * multiple
+	return absolute_difference <= tolerance or is_equal_approx(absolute_difference, tolerance)
+
 #smooth minimum
 static func polynomial_smin(a : float, b : float, k : float =0.1) -> float:
 	var h = clamp(0.5 + 0.5 * (a - b) / k, 0.0, 1.0)
