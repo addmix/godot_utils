@@ -1,6 +1,6 @@
 extends Node
 
-func _init():
+func _enter_tree():
 	if has_node("/root/FloatingOriginHelper"):
 		get_node("/root/FloatingOriginHelper").origin_shifted.connect(_on_origin_shifted)
 
