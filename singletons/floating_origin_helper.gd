@@ -14,7 +14,7 @@ var floating_origin : FloatingOrigin:
 		floating_origin.origin_shifted.connect(_on_floating_origin_origin_shifted)
 
 func get_global_position(node : Node3D) -> Vector3:
-	if floating_origin:
+	if is_instance_valid(floating_origin):
 		return node.global_position + floating_origin.global_offset
 	else:
 		return node.global_position
