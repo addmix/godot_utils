@@ -5,17 +5,17 @@ class_name UnitUtils
 ##
 ## Intended usage example:[br]
 ## [br]
-## meters to yards: [code]UnitUtils.convert_meters_to(1.0, UnitUtils.Conversions.yards)[/code][br]
-## meters/second to meters/hour: [code]UnitUtils.convert_meters_to(1.0, UnitUtils.Conversions.no_change, UnitUtils.Conversions.hours)[/code][br]
-## meters/second to miles/hour: [code]UnitUtils.convert_meters_to(100.0, UnitUtils.Conversions.miles, UnitUtils.Conversions.hour)[/code][br]
+## meters to yards: [code]UnitUtils.convert_standard_to(1.0, UnitUtils.Conversions.yards)[/code][br]
+## meters/second to meters/hour: [code]UnitUtils.convert_standard_to(1.0, UnitUtils.Conversions.no_change, UnitUtils.Conversions.hours)[/code][br]
+## meters/second to miles/hour: [code]UnitUtils.convert_standard_to(100.0, UnitUtils.Conversions.miles, UnitUtils.Conversions.hour)[/code][br]
 ## [br]
 ## Weight:[br]
 ## kilograms to pounds: [code]UnitUtils.convert_standard_to(2, UnitUtils.Conversions.pound)[/code][br]
 ## [br]
 ## Special conversion:[br]
-## m/s to knots: [code]UnitUtils.convert_meters_to(100.0, UnitUtils.Conversions.knots)[/code][br]
-## m/s^2 to gravity: [code]UnitUtils.convert_meters_to(9.81, UnitUtils.Conversions.gravity)[/code][br]
-## m/s^2 to ft/s^2: [code]UnitUtils.convert_meters_to(1.0, UnitUtils.Conversions.feet)[/code][br]
+## m/s to knots: [code]UnitUtils.convert_standard_to(100.0, UnitUtils.Conversions.knots)[/code][br]
+## m/s^2 to gravity: [code]UnitUtils.convert_standard_to(9.81, UnitUtils.Conversions.gravity)[/code][br]
+## m/s^2 to ft/s^2: [code]UnitUtils.convert_standard_to(1.0, UnitUtils.Conversions.feet)[/code][br]
 
 
 #conversion factors for converting meters to other units.
