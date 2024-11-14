@@ -21,8 +21,12 @@ func _enter_tree() -> void:
 		add_autoload_singleton("FloatingOriginHelper", "res://addons/godot_utils/singletons/floating_origin_helper.gd")
 	
 	var enable_settings_manager : bool = SettingsUtils.ifndef("godot_utils/settings_manager/enabled_settings_manager", false)
-	if enable_floating_origin_helper:
+	if enable_settings_manager:
 		add_autoload_singleton("SettingsManager", "res://addons/godot_utils/singletons/settings_manager.gd")
+	
+	var enable_command_line_argument_parser : bool = SettingsUtils.ifndef("godot_utils/command_line_argument_parser/enable_command_line_argument_parser", false)
+	if enable_command_line_argument_parser:
+		add_autoload_singleton("CommandLineArgumentParser", "res://addons/godot_utils/singletons/command_line_argument_parser.gd")
 	
 	#resources
 	add_custom_type("PID", "Resource", preload("./resources/pid.gd"), node_icon)
