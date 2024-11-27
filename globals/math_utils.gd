@@ -6,7 +6,8 @@ const E := 2.718281828459045
 
 #type-less functions
 
-
+static func derivative_of(current : Variant, previous : Variant, delta : float) -> Variant:
+	return (current - previous) / delta
 
 static func toggle(condition : bool, _true : Variant, _false : Variant) -> Variant:
 	return float(condition) * _true + float(!condition) * _false
