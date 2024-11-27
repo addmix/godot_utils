@@ -1,7 +1,10 @@
 class_name Physics3DUtils
 
+static func get_center_of_mass_in_global_space(node : RigidBody3D) -> Vector3:
+	return node.global_position + node.global_basis * node.center_of_mass
+
 #https://github.com/godotengine/godot-proposals/issues/773
-func get_point_velocity(node : PhysicsBody3D, relative_position : Vector3) -> Vector3:
+static func get_point_velocity(node : PhysicsBody3D, relative_position : Vector3) -> Vector3:
 	return node.linear_velocity + node.angular_velocity.cross(relative_position - node.center_of_mass);
 
 static func true_proportional_navigation(los_rate : Vector2, closing_velocity : float, proportionality_constant : float = 4.0) -> Vector2:
