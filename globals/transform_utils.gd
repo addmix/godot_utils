@@ -1,5 +1,11 @@
 class_name TransformUtils
 
+static func add_basis(a : Basis, b : Basis) -> Basis:
+	return Basis(a.x + b.x, a.y + b.y, a.z + b.z)
+
+static func subtract_basis(a : Basis, b : Basis) -> Basis:
+	return Basis(a.x - b.x, a.y - b.y, a.z - b.z)
+
 static func quat_to_axis_angle(quat : Quaternion) -> Vector4:
 	var axis_angle := Vector4(0, 0, 0, 0)
 
