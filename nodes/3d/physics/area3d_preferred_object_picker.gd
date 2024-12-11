@@ -24,7 +24,7 @@ func _on_function_grab_area_entered(area : Area3D) -> void:
 	_update_preferred_node()
 
 func _on_function_grab_area_exited(area : Area3D) -> void:
-	if nodes_in_area.find(area) != -1:
+	if nodes_in_area.has(area):
 		nodes_in_area.erase(area)
 		_update_preferred_node()
 
@@ -33,7 +33,7 @@ func _on_function_grab_body_entered(body : Node3D) -> void:
 	_update_preferred_node()
 
 func _on_function_grab_body_exited(body : Node3D) -> void:
-	if nodes_in_area.find(body) != -1:
+	if nodes_in_area.has(body):
 		nodes_in_area.erase(body)
 		_update_preferred_node()
 
@@ -43,7 +43,7 @@ func _update_preferred_node() -> void:
 		return
 	
 	#choose the preferred node
-	var new_preferred_node = null
+	var new_preferred_node = preferred_node
 	for node in nodes_in_area:
 		preferred_node = _choose_preferred_node(node, new_preferred_node)
 
