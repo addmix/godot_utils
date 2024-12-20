@@ -22,11 +22,18 @@ func _ready() -> void:
 	states[current_state]._enter("_init")
 
 func change_state(new_state : StringName) -> void:
+	if is_multiplayer_authority():
+		rpc_sync_state.rpc(new_state)
+	
 	#exit current state, and disable the code from running
 	states[current_state]._exit(new_state)
 	states[current_state].set_process_mode(Node.PROCESS_MODE_DISABLED)
-
+	
 	#enter new state, and make the new state run
 	states[new_state]._enter(current_state)
 	current_state = new_state
 	states[current_state].set_process_mode(Node.PROCESS_MODE_INHERIT)
+
+@rpc("authority", "call_remote", "reliable")
+func rpc_sync_state(state : StringName) -> void:
+	change_state(state)
