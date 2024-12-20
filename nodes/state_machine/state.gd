@@ -4,7 +4,11 @@ class_name State
 signal _change_state
 
 func change_state(new_state : StringName) -> void:
-	call_deferred("emit_signal", "_change_state", new_state)
+	#this might be bad
+	if not is_multiplayer_authority():
+		return
+	
+	_change_state.emit.call_deferred(new_state, self)
 
 #virtual 
 func _ready() -> void:
