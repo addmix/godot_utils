@@ -1,5 +1,7 @@
 class_name V3Utils
 
+static func abs(vector : Vector3) -> Vector3:
+	return Vector3(abs(vector.x), abs(vector.y), abs(vector.z))
 
 static func clamp(vector : Vector3, lower : Vector3, upper : Vector3) -> Vector3:
 	return V3Utils.max(V3Utils.min(vector, upper), lower)
