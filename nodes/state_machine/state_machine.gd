@@ -17,7 +17,13 @@ func _ready() -> void:
 		states[child.name] = child
 		child._change_state.connect(change_state)
 		child.set_process_mode(Node.PROCESS_MODE_DISABLED)
-
+	
+	if not current_state:
+		var first_state : State = NodeUtils.get_first_child_of_type(self, State)
+		if not first_state:
+			return
+		current_state = first_state.name
+	
 	states[current_state].set_process_mode(Node.PROCESS_MODE_INHERIT)
 	states[current_state]._enter("_init")
 
