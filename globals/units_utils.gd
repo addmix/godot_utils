@@ -1,4 +1,3 @@
-extends Node
 class_name UnitUtils
 ## Class for converting units.[br]
 ## Standard units: Meters, Seconds, Kilograms.

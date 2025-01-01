@@ -1,4 +1,3 @@
-extends Node
 class_name InputUtils
 
 func get_axis_safe(negative_event : StringName, positive_event : StringName) -> float:

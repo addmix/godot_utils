@@ -79,4 +79,3 @@ static func get_first_parent_with_name(node : Node, _name : String) -> Node:
 		return parent
 	else:
 		return get_first_parent_with_name(parent, _name)
-

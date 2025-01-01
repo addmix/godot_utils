@@ -42,4 +42,3 @@ static func get_plugin_path(plugin_name : String) -> String:
 	if not dictionary.has(plugin_name):
 		push_error("Plugin name not found in plugin dictionary.")
 	return dictionary[plugin_name ]["path"]
-
