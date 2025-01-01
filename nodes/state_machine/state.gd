@@ -3,11 +3,8 @@ class_name State
 
 signal _change_state
 
+@rpc("authority", "call_local", "reliable")
 func change_state(new_state : StringName) -> void:
-	#this might be bad
-	if not is_multiplayer_authority():
-		return
-	
 	_change_state.emit.call_deferred(new_state, self)
 
 #virtual 

@@ -27,15 +27,8 @@ func _ready() -> void:
 	states[current_state].set_process_mode(Node.PROCESS_MODE_INHERIT)
 	states[current_state]._enter("_init")
 
+@rpc("authority", "call_local", "reliable")
 func change_state(new_state : StringName, from_state : State = null) -> void:
-	#prevent state changes if from_state is supplied, and from_state is not the current state
-	#if not from_state and from_state == state:
-		#push_error("Attempted to change state from an inactive state.")
-		#return
-	
-	if is_multiplayer_authority():
-		rpc_sync_state.rpc(new_state)
-	
 	#exit current state, and disable the code from running
 	states[current_state]._exit(new_state)
 	states[current_state].set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -44,7 +37,3 @@ func change_state(new_state : StringName, from_state : State = null) -> void:
 	states[new_state]._enter(current_state)
 	current_state = new_state
 	states[current_state].set_process_mode(Node.PROCESS_MODE_INHERIT)
-
-@rpc("authority", "call_remote", "reliable")
-func rpc_sync_state(state : StringName) -> void:
-	change_state(state)
