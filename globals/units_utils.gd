@@ -5,8 +5,10 @@ class_name UnitUtils
 ## Intended usage example:[br]
 ## [br]
 ## meters to yards: [code]UnitUtils.convert_standard_to(1.0, UnitUtils.Conversions.yards)[/code][br]
-## meters/second to meters/hour: [code]UnitUtils.convert_standard_to(1.0, UnitUtils.Conversions.no_change, UnitUtils.Conversions.hours)[/code][br]
-## meters/second to miles/hour: [code]UnitUtils.convert_standard_to(100.0, UnitUtils.Conversions.miles, UnitUtils.Conversions.hour)[/code][br]
+## meters/second to meters/hour: [code]UnitUtils.convert_standard_to(1.0, UnitUtils.Conversions.hours)[/code][br]
+## meters/second to miles/hour: [code]UnitUtils.convert_standard_to(100.0, UnitUtils.rate(UnitUtils.Conversions.miles, UnitUtils.Conversions.hour))[/code][br]
+## [br]
+## Note: [code]UnitUtils.rate()[/code] should only be used when converting rates (i.e. distance/time, kilometers/hour, miles/hour, etc.), and should not be used for converting time (i.e. seconds to hours, hours to days)[br]
 ## [br]
 ## Weight:[br]
 ## kilograms to pounds: [code]UnitUtils.convert_standard_to(2, UnitUtils.Conversions.pound)[/code][br]
@@ -15,7 +17,9 @@ class_name UnitUtils
 ## m/s to knots: [code]UnitUtils.convert_standard_to(100.0, UnitUtils.Conversions.knots)[/code][br]
 ## m/s^2 to gravity: [code]UnitUtils.convert_standard_to(9.81, UnitUtils.Conversions.gravity)[/code][br]
 ## m/s^2 to ft/s^2: [code]UnitUtils.convert_standard_to(1.0, UnitUtils.Conversions.feet)[/code][br]
-
+## [br]
+## Conversion between units:[br]
+## miles/hour to kilometers/second: [code]UnitUtils.convert_units(value, UnitUtils.rate(UnitUtils.Conversions.miles, UnitUtils.Conversions.hour), UnitUtils.rate(UnitUtils.Conversions.kilometers, UnitUtils.Conversions.second))[/code][br]
 
 #conversion factors for converting meters to other units.
 const Conversions = {
@@ -50,6 +54,8 @@ const Conversions = {
 	"century" : 3.168753601134e-8 / 100.0, 
 	"millenia" : 3.168753601134e-8 / 1000.0,
 	
+	
+	#these speed/acceleration-specific factors must be placed in the distance factor, rather than the time factor.
 	#speed-specific
 	"knots" : 1.9438444924406,
 	
@@ -65,12 +71,20 @@ const Conversions = {
 	"pound" : 2.2046226218488,
 }
 
+## Used to convert from a standard unit (meter, kilogram, second), to any other unit or rate.
+static func convert_standard_to(value : float, unit : float = 1.0) -> float:
+	return value * unit
 
-static func convert_standard_to(value : float, distance_unit : float = 1.0, time_unit : float = 1.0) -> float:
-	return value * (distance_unit / time_unit)
+## Used to convert any unit or rate back to standard units (meter, kilogram, second).
+static func convert_to_standard(value : float, unit : float = 1.0) -> float:
+	return value / unit
 
-static func convert_to_standard(value : float, distance_unit : float = 1.0, time_unit : float = 1.0) -> float:
-	return value / (distance_unit / time_unit)
+## Used to convert between any units or rates. (for example, converting between miles per hour and kilometers per second.)
+static func convert_units(value : float, from_unit : float = 1.0, to_unit : float = 1.0) -> float:
+	return convert_standard_to(convert_to_standard(value, from_unit), to_unit)
 
-static func convert_units(value : float, from_distance_unit : float = 1.0, from_time_unit : float = 1.0, to_distance_unit : float = 1.0, to_time_unit : float = 1.0) -> float:
-	return convert_standard_to(convert_to_standard(value, from_distance_unit, from_time_unit), to_distance_unit, to_time_unit)
+## Used to define a rate unit for conversion. [br]
+## Example: Miles per Hour: [code]UnitUtils.rate(UnitUtils.Conversions.miles, UnitUtils.Conversions.hour)[/code] [br]
+## The result of this function should be passed into any of the [code]UnitUtils.convert_*()[/code] functions.
+static func rate(distance_unit : float = 1.0, time_unit : float = 1.0) -> float:
+	return distance_unit / time_unit
