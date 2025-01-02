@@ -21,3 +21,36 @@ static func format_number(number : float, number_of_decimals : int = 1) -> Strin
 	#add monetary symbol
 	string += NOTATION[rounded_power_of_1000]
 	return string
+
+static func format_time(time : float, delimiter : String = ":") -> String:
+	var time_left : float = time
+	var end_string : String = ""
+	
+	#hours
+	var hours : float = UnitUtils.convert_standard_to(time_left, UnitUtils.Conversions.hour)
+	hours = floorf(hours)
+	time_left -= UnitUtils.convert_to_standard(hours, UnitUtils.Conversions.hour)
+	if hours > 0.0 or not end_string == "":
+		end_string += String.num(hours, 0) + delimiter
+	
+	#minutes
+	var minutes : float = UnitUtils.convert_standard_to(time_left, UnitUtils.Conversions.minute)
+	minutes = floorf(minutes)
+	time_left -= UnitUtils.convert_to_standard(minutes, UnitUtils.Conversions.minute)
+	#if minutes > 0.0 or not end_string == "":
+	end_string += String.num(minutes, 0).pad_zeros(2) + delimiter
+	
+	#seconds
+	#no conv
+	var seconds : float = floorf(time_left)
+	time_left -= seconds
+	#if seconds > 0.0 or not end_string == "":
+	end_string += String.num(seconds, 0).pad_zeros(2) + delimiter
+	
+	#milliseconds
+	var milli : float = UnitUtils.convert_standard_to(time_left, UnitUtils.Conversions.millisecond)
+	milli = floorf(milli)
+	#if milli > 0.0 or not end_string == "":
+	end_string += String.num(milli, 0).pad_zeros(3).left(2)
+	
+	return end_string
