@@ -16,15 +16,14 @@ func parse_cmdline_args(args : PackedStringArray) -> Dictionary:
 	var parsed_args : Dictionary = {}
 	
 	for arg : String in args:
-		
 		#check if argument is an assignment
 		if arg.match("*=*"):
 			var argument_sections : PackedStringArray = arg.split("=")
-			if parsed_args.size() == 0:
+			if argument_sections.size() == 0:
 				#no valid args
 				continue
 			
-			if parsed_args.size() == 2:
+			if argument_sections.size() == 2:
 				#no proper assignment
 				parsed_args[argument_sections[0]] = str_to_var(argument_sections[1])
 				continue
