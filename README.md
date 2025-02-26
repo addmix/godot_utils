@@ -7,7 +7,8 @@ A library of utility functions and nodes for the Godot game engine.
 3. Enable plugin in `Projects > Project Settings > Plugins`
 
 ## Documentation
-[Documentation](https://github.com/addmix/godot_utils/wiki/index)
+Documentation is embedded within the plugin's scripts. Documentation is most-easily viewed inside the Godot Engine.
+Shortcut to access documentation of any class: F1 > Search for class name (example: `StringUtils`).
 
 ## Usage
 
