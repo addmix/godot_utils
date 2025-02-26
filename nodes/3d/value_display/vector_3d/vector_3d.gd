@@ -2,6 +2,12 @@
 extends MeshInstance3D
 class_name Vector3D
 
+## Creates a line/arrow shape to visualize a Vector3. Displayed value is relative to the parent node's local space. [br]
+## [br]
+## BUG: [br]
+## When Vector3Ds are duplicated in the editor, they will share a mesh/material until the scene is reloaded. This is a bug. [br]
+
+## Vector3 value to be displayed.
 @export var value := Vector3.ZERO:
 	set(x):
 		value = x
@@ -22,19 +28,23 @@ class_name Vector3D
 			up = Vector3(1, 0, 0)
 		
 		transform.basis = transform.basis.looking_at(value, up)
+## Color the Vector3D will be displayed as.
 @export var color := Color(1, 1, 1):
 	set(x):
 		color = x
 		material.set_shader_parameter("_color", color)
+## Width of the Vector3D at the thickest point.
 @export var width := 0.1:
 	set(x):
 		width = x
 		material.set_shader_parameter("_width", width)
+## If enabled, the Vector3D will have a checkered pattern of black and [code]color[/code].
 @export var checker := false:
 	set(x):
 		checker = x
 		material.set_shader_parameter("checker_pattern", checker)
 
+## Internal variable. Material is created during _init.
 var material := ShaderMaterial.new()
 
 var _mesh : Array[Vector3] = [Vector3(0, -1, 0), Vector3(-1, 0, 0), Vector3(0, 1, 0), Vector3(1, 0, 0)]

@@ -1,5 +1,7 @@
 extends Node
 
+## Maintains a list of peers and their latency.
+
 #in seconds
 var ping : float = 0.0
 
