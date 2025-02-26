@@ -1,5 +1,8 @@
 class_name FileUtils
 
+## Helpful utilities for working with files. 
+
+## Returns a PackedStringArray containing the names of all files and subdirectories in the specified directory.
 static func get_files_in_directory(path : String) -> PackedStringArray:
 	var files : PackedStringArray = PackedStringArray([])
 
@@ -23,6 +26,7 @@ static func get_files_in_directory(path : String) -> PackedStringArray:
 	dir.list_dir_end()
 	return files
 
+
 static func find_file_of_type(path : String, type : String) -> String:
 	var dir := DirAccess.open(path)
 
@@ -30,7 +34,6 @@ static func find_file_of_type(path : String, type : String) -> String:
 	dir.list_dir_begin()
 	var val
 
-	#goes through weapons folder into weapon category folders
 	while(val != ""):
 		#gets next file in directory
 		val = dir.get_next()

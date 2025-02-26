@@ -3,8 +3,8 @@ extends State
 @onready var player = $"../../"
 
 
-#in this state you are moving/walking. I use the variable movement_enabled to
-#control when user movement controls are obeyed.
+# in this state you are moving/walking. I use the variable movement_enabled to
+# control when user movement controls are obeyed.
 
 
 func _enter(from : StringName) -> void:

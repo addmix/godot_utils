@@ -2,6 +2,13 @@ class_name StringUtils
 
 const NOTATION : Array = ["", "K", "M", "B", "T", "QA", "QI", "SX", "SP", "OC", "NO", "DC", "UD", "DD", "TD", "QAD", "QID", "SXD", "SPD", "OCD", "NOD", "VG", "UVG", "DVG", "TVG", "QAVG", "QIVG", "SXVG", "SPVG", "OCVG"]
 
+## Formats a float as a large number. [br]
+## [br]
+## Example: [code]format_number(1234567.89, 2) == "1.234M"[/code]
+# TODO: Change behavior so that total number of digits is considered instead of the number of decimals.
+# TODO: Allow for usage of different number notations
+# TODO: Allow for usage of different number bases
+# TODO: Allow for fractional notation (centi, milli, etc)
 static func format_number(number : float, number_of_decimals : int = 1) -> String:
 	#figure out how many decimal places to shift
 	var power_of_1000 : float = MathUtils.log_with_base(number, 1000)
@@ -22,6 +29,12 @@ static func format_number(number : float, number_of_decimals : int = 1) -> Strin
 	string += NOTATION[rounded_power_of_1000]
 	return string
 
+## Formats a float as time. [br]
+## [br]
+## Example: [code]format_time(123.45) == "02:03:45"[/code]
+## Example: [code]format_time(12345) == "03:25:45:00"[/code]
+# TODO: Extend so that days, months, and years might be used.
+# TODO: Provide options to omit milliseconds.
 static func format_time(time : float, delimiter : String = ":") -> String:
 	var time_left : float = time
 	var end_string : String = ""
@@ -33,6 +46,7 @@ static func format_time(time : float, delimiter : String = ":") -> String:
 	if hours > 0.0 or not end_string == "":
 		end_string += String.num(hours, 0) + delimiter
 	
+	# TODO: fix usage of pad_zeros() so that the leading number does not pad.
 	#minutes
 	var minutes : float = UnitUtils.convert_standard_to(time_left, UnitUtils.Conversions.minute)
 	minutes = floorf(minutes)

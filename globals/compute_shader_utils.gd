@@ -1,5 +1,8 @@
 class_name ComputeShaderUtils
 
+## Helpful utilities for working with Arrays. 
+
+## Converts an array of primitive variants into an array of bytes. Objects, Arrays, and Dictionaries are not supported.
 static func convert_array_to_bytes(array : Array) -> PackedByteArray:
 	var bytes := PackedByteArray([])
 	for item in array:
@@ -28,7 +31,7 @@ static func convert_array_to_bytes(array : Array) -> PackedByteArray:
 	bytes = extend_byte_array_to_memory_block(bytes)
 	return bytes
 
-#compute shader memory is in block of 16 bytes, and it is necessary to
+## Rounds a PackedByteArray up to the next block of 16 bytes. This may be necessary to avoid uninitialized memory in compute shaders.
 static func extend_byte_array_to_memory_block(byte_array : PackedByteArray) -> PackedByteArray:
 	var filler_bytes := PackedByteArray([])
 	var remainder_bytes : int = byte_array.size() % 16

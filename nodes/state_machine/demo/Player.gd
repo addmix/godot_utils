@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -400.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var input := Vector2.ZERO
+# this variable allows states to disable movement
 var movement_enabled := false
 
 func _physics_process(delta: float) -> void:
@@ -21,6 +22,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+# this is called by the jumping state to cause a jump
 func jump():
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY

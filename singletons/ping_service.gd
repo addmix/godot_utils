@@ -1,6 +1,8 @@
 extends Node
 
-## Maintains a list of peers and their latency.
+## Maintains a list of peers and their latency.[br]
+## [br]
+## 
 
 #in seconds
 var ping : float = 0.0
@@ -51,6 +53,7 @@ func receive_ping_dictionary(ping_dictionary : Dictionary) -> void:
 	ping_dictionary = ping_dictionary
 
 #we should probably clarify naming that this is total ping between ourselves and the target peer ID
+## Returns the round-trip latency between the local machine and the given peer ID.
 func get_ping(id : int) -> float:
 	var total_ping : float = ping + ping_dictionary.get(id, -0.0)
 	
@@ -69,10 +72,11 @@ func on_peer_connected(id : int) -> void:
 #if delay_time is lower than a peer's latency, they will be desynced.
 #function is the function to be called, which must be configured as an RPC.
 #params are any parameters for the function to be RPC'd
+## Attempts to send an RPC while compensating for network latency.
 func rpc_reliable_timing(delay_time : float, function : Callable, params : Array = []) -> void:
 	print("starting rpc")
 	for peer_id : int in MultiplayerUtils.get_connected_peer_ids(multiplayer):
-		var rpc_latency : float = ping + get_ping(peer_id)
+		var rpc_latency : float = get_ping(peer_id) * 0.5
 		#ping to self is 0
 		#this could be wrong if RPCs configured with call_local still propagate from client to server, back to client.
 		if peer_id == multiplayer.get_unique_id():

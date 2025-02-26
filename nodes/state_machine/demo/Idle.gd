@@ -2,12 +2,8 @@ extends State
 
 @onready var player = $"../../"
 
-
-#in this state, you are not moving, jumping, falling or landed, you are sitting still
-
-
-func _enter(from : StringName) -> void:
-	player.movement_enabled = false
+# in this state, you are not moving, jumping, falling or landed, you are sitting still
+# when input is detected, change to either the moving or jumping state.
 
 func _physics_process(delta: float) -> void:
 	#when the player's velocity is greater than 0, and not on the floor, we can

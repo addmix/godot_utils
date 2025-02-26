@@ -3,9 +3,8 @@ extends MeshInstance3D
 class_name Vector3D
 
 ## Creates a line/arrow shape to visualize a Vector3. Displayed value is relative to the parent node's local space. [br]
-## [br]
-## BUG: [br]
-## When Vector3Ds are duplicated in the editor, they will share a mesh/material until the scene is reloaded. This is a bug. [br]
+
+# BUG: When Vector3Ds are duplicated in the editor, they will share a mesh/material until the scene is reloaded. This is a bug.
 
 ## Vector3 value to be displayed.
 @export var value := Vector3.ZERO:
