@@ -27,30 +27,30 @@ void vertex() {
 
 
 //from Mux
-//So basically you would do: vec3 view_pos = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz + 
-//EYE_OFFSET, and get a position that is properly adjusted for the eye being rendered. But 
+//So basically you would do: vec3 view_pos = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz +
+//EYE_OFFSET, and get a position that is properly adjusted for the eye being rendered. But
 //only after I add in support for accessing EYE_OFFSET
 
 
 	vec3 lens_origin = object_to_view(MODELVIEW_MATRIX, vec3(0.0)) - EYE_OFFSET;
-	
+
 	//this is the centerpoint of the projected sight, offset from the model
 	vec3 p0 = object_to_view(MODELVIEW_MATRIX, vec3(0.0, 0.0, -_distance)) - EYE_OFFSET;
-	
+
 	//this is the normal of the projected sight
 	vec3 n = object_to_view(MODELVIEW_MATRIX, vec3(0.0, 0.0, -1.0)) - lens_origin - EYE_OFFSET;
-	
+
 	//tangent vector along the U direction (in UV)
 	vec3 u_dir = object_to_view(MODELVIEW_MATRIX, vec3(1.0, 0.0, 0.0)) - lens_origin - EYE_OFFSET;
-	
+
 	//tangent vector along the V direction (in UV)
 	vec3 v_dir = object_to_view(MODELVIEW_MATRIX, vec3(0.0, 1.0, 0.0)) - lens_origin - EYE_OFFSET;
-	
+
 	//vertex position
 	vec3 vert = object_to_view(MODELVIEW_MATRIX, VERTEX) - EYE_OFFSET;
 	float a = dot(p0, n) / dot(vert, n);
 	vec3 vert_prime = a * vert;
-	
+
 	vertex = VERTEX;
 	uv = vec2(-dot(vert_prime - p0, u_dir), dot(vert_prime - p0, v_dir));
 	uv = uv / (_scale * -_distance);

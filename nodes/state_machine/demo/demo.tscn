@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://i8nfbldhsvav"]
 
-[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Player.gd" id="1_c033c"]
-[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/state_machine.gd" id="1_lstjd"]
-[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Idle.gd" id="2_xpbd6"]
-[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Moving.gd" id="4_gpy0x"]
-[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Jumping.gd" id="5_sw583"]
-[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Falling.gd" id="6_4vcqc"]
-[ext_resource type="Script" path="res://addons/godot_utils/nodes/state_machine/demo/Landed.gd" id="7_dhnli"]
+[ext_resource type="Script" uid="uid://cp2tn37cwhnt6" path="res://addons/godot_utils/nodes/state_machine/demo/Player.gd" id="1_c033c"]
+[ext_resource type="Script" uid="uid://cmtgbhd1umaik" path="res://addons/godot_utils/nodes/state_machine/state_machine.gd" id="1_lstjd"]
+[ext_resource type="Script" uid="uid://biec6xaspyqco" path="res://addons/godot_utils/nodes/state_machine/demo/Idle.gd" id="2_xpbd6"]
+[ext_resource type="Script" uid="uid://bebnasr55r28r" path="res://addons/godot_utils/nodes/state_machine/demo/Moving.gd" id="4_gpy0x"]
+[ext_resource type="Script" uid="uid://b710hw3yfrl15" path="res://addons/godot_utils/nodes/state_machine/demo/Jumping.gd" id="5_sw583"]
+[ext_resource type="Script" uid="uid://dig6jyxp5b18e" path="res://addons/godot_utils/nodes/state_machine/demo/Falling.gd" id="6_4vcqc"]
+[ext_resource type="Script" uid="uid://crcb74cdnao1p" path="res://addons/godot_utils/nodes/state_machine/demo/Landed.gd" id="7_dhnli"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fl4i7"]
 
