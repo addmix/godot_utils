@@ -46,7 +46,7 @@ func _init(_p : Vector3 = p, _i : Vector3 = i, _d : Vector3 = d) -> void:
 func update(delta : float, error : Vector3) -> Vector3:
 	var derivative : Vector3 = (error - _last_error) / delta
 	_integral_error += error * delta
-	_integral_error = V3Utils.toggle(clamp_integral, clamp(_integral_error, min_integral, max_integral), _integral_error)
+	_integral_error = MathUtils.toggle(clamp_integral, clamp(_integral_error, min_integral, max_integral), _integral_error)
 	_last_error = error
 	
 	proportional_output = p * error
