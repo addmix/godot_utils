@@ -27,10 +27,11 @@
 
 
 shader_type spatial;
-render_mode blend_add, unshaded, specular_schlick_ggx;
+render_mode blend_add, specular_schlick_ggx;
 
 uniform sampler2D _texture_albedo : source_color;
 uniform float _scale = 0.1;
+uniform sampler2D _texture_emission : source_color;
 
 //should implement some hue shift or something here
 uniform float _intensity_factor = 1.0;
@@ -61,6 +62,7 @@ void fragment() {
 	if(uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0){
 		color.a = 0.0;
 	}
+	EMISSION = color.rgb * _intensity_factor;
 	ALBEDO = color.rgb;
 	ALPHA = color.a;
 }
