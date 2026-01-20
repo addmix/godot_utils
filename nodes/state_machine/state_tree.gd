@@ -22,11 +22,11 @@ func _ready() -> void:
 	#initialize starting state
 	if not current_state:
 		current_state = NodeUtils.get_first_child_of_type(self, StateTree)
-	
-	current_state.process_mode = Node.PROCESS_MODE_INHERIT
-	current_state.state_enter(self)
-	
-	state_changed.emit(current_state)
+	if current_state:
+		current_state.process_mode = Node.PROCESS_MODE_INHERIT
+		current_state.state_enter(self)
+		
+		state_changed.emit(current_state)
 	
 	state_ready()
 
