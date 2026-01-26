@@ -5,6 +5,7 @@ signal state_changed(to_state : StateTree)
 
 var states := {}
 @export var current_state : StateTree
+var currently_exiting : bool = false
 var parent_state_machine : StateTree:
 	get:
 		if not is_inside_tree():
@@ -46,13 +47,16 @@ func child_requested_state_change(from_state : StateTree, to_state : StateTree) 
 	if not from_state.get_parent() == to_state.get_parent():
 		return
 	
+	from_state.currently_exiting = true
 	await from_state.state_exit(to_state)
+	
 	# these process_mode assignments should maybe be worked around, because
 	# they interfere with developer configuration options.
 	#
 	# in the meantime, process modes can be adjusted in the state_enter and state_exit functions
 	# (state_exit would require call_deferred, because of execution order.)
 	from_state.process_mode = Node.PROCESS_MODE_DISABLED
+	from_state.currently_exiting = false
 	
 	current_state = to_state
 	
