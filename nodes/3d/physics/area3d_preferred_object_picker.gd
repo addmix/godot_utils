@@ -16,12 +16,14 @@ func _ready() -> void:
 		connect("body_entered", _on_function_grab_body_entered)
 		connect("body_exited", _on_function_grab_body_exited)
 
+#this could be optimized to only run when the preferred node is requested, instead of running every update
 func _physics_process(_delta : float) -> void:
 	_update_preferred_node()
 
 func _on_function_grab_area_entered(area : Area3D) -> void:
-	nodes_in_area.push_back(area)
-	_update_preferred_node()
+	if not _is_node_excluded(area):
+		nodes_in_area.push_back(area)
+		_update_preferred_node()
 
 func _on_function_grab_area_exited(area : Area3D) -> void:
 	if nodes_in_area.has(area):
@@ -29,8 +31,9 @@ func _on_function_grab_area_exited(area : Area3D) -> void:
 		_update_preferred_node()
 
 func _on_function_grab_body_entered(body : Node3D) -> void:
-	nodes_in_area.push_back(body)
-	_update_preferred_node()
+	if not _is_node_excluded(body):
+		nodes_in_area.push_back(body)
+		_update_preferred_node()
 
 func _on_function_grab_body_exited(body : Node3D) -> void:
 	if nodes_in_area.has(body):
@@ -49,13 +52,19 @@ func _update_preferred_node() -> void:
 
 #if there is no preference between node a and node b, node a is returned
 func _choose_preferred_node(node_a : Node3D, node_b : Node3D) -> Node3D:
-	if not is_instance_valid(node_a):
+	if not is_instance_valid(node_a) and is_instance_valid(node_b):
 		return node_b
-	elif not is_instance_valid(node_b):
+	elif not is_instance_valid(node_b) and is_instance_valid(node_a):
 		return node_a
+	else:
+		return null
+	
 	var distance_a : float = global_transform.origin.distance_squared_to(node_a.global_transform.origin)
 	var distance_b : float = global_transform.origin.distance_squared_to(node_b.global_transform.origin)
 	if distance_a <= distance_b:
 		return node_a
 	else:
 		return node_b
+
+func _is_node_excluded(node : Node3D) -> bool:
+	return false
