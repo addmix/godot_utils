@@ -48,6 +48,16 @@ static func get_first_descandant_of_type(node : Node, type, include_internal : b
 	
 	return null
 
+## Returns a node array containing all children of a given node type.
+static func get_children_of_type(node : Node, type, include_internal : bool = false) -> Array[Node]:
+	var children_of_type : Array[Node] = []
+	
+	for child in node.get_children(include_internal):
+		if is_instance_of(child, type):
+			children_of_type.append(child)
+	
+	return children_of_type
+
 ## Returns a node array containing all descendants of a given node type.
 static func get_descendants_of_type(node : Node, type, include_internal : bool = false) -> Array[Node]:
 	var descandants_of_type : Array[Node] = []
