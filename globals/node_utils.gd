@@ -28,8 +28,8 @@ static func get_descendants(node : Node, include_internal : bool = false) -> Arr
 	return arr
 
 ## Returns the first child node of a given node type.
-static func get_first_child_of_type(node : Node, type) -> Node:
-	for child in node.get_children():
+static func get_first_child_of_type(node : Node, type, include_internal : bool = false) -> Node:
+	for child in node.get_children(include_internal):
 		if is_instance_of(child, type):
 			return child
 	return null
