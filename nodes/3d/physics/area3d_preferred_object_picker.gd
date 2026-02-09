@@ -52,7 +52,9 @@ func _update_preferred_node() -> void:
 
 #if there is no preference between node a and node b, node a is returned
 func _choose_preferred_node(node_a : Node3D, node_b : Node3D) -> Node3D:
-	if not is_instance_valid(node_a) and is_instance_valid(node_b):
+	if is_instance_valid(node_a) and is_instance_valid(node_b):
+		pass
+	elif not is_instance_valid(node_a) and is_instance_valid(node_b):
 		return node_b
 	elif not is_instance_valid(node_b) and is_instance_valid(node_a):
 		return node_a
