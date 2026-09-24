@@ -9,4 +9,4 @@ static func ifndef(setting : String, default_value : Variant) -> Variant:
 			ProjectSettings.set_initial_value(setting, default_value)
 	# TODO: Should the projectsettings be saved here?
 
-	return ProjectSettings.get_setting(setting)
+	return ProjectSettings.get_setting(setting, default_value)
