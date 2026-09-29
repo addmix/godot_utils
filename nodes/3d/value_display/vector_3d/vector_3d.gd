@@ -11,21 +11,9 @@ class_name Vector3D
 	set(x):
 		value = x
 		material.set_shader_parameter("_length", value.length())
-
-		#prevent error when value is 0
-		var length_squared := value.length_squared()
-		if is_equal_approx(length_squared, 0.0):
-			#reset rotation
-			basis = Basis()
-			return
 		
-		#prevent error when the value is colinear with the up axis
-		var up := Vector3(0, 1, 0)
-		var cross := value.cross(up)
-		if is_equal_approx(cross.length_squared(), 0.0):
-			up = Vector3(1, 0, 0)
-		
-		transform.basis = transform.basis.looking_at(value, up)
+		#TODO: change this so that "up" uses thes scene's camera up vector instead
+		transform.basis = TransformUtils.looking_at_safe(value, Vector3(0, 1, 0), Vector3(1, 0, 0))
 ## Color the Vector3D will be displayed as.
 @export var color := Color(1, 1, 1):
 	set(x):
