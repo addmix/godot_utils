@@ -1,3 +1,4 @@
+@tool
 class_name SettingsUtils
 
 ## Returns the given ProjectSetting. If the ProjectSetting is not declared, a default value will be added to the project settings, and the default value is returned.

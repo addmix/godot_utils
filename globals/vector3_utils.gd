@@ -1,3 +1,4 @@
+@tool
 class_name V3Utils
 
 ## Returns the Manhattan/Taxicab distance between two vectors.

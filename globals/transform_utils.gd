@@ -1,3 +1,4 @@
+@tool
 class_name TransformUtils
 
 ## Performs an addition matrix operation for two bases.

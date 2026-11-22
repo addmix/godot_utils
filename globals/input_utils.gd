@@ -1,3 +1,4 @@
+@tool
 class_name InputUtils
 
 ## An alias for [code]Input.get_axis()[/code] that will not error or warn if either event is invalid.

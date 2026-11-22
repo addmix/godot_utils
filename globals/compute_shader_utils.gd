@@ -1,3 +1,4 @@
+@tool
 class_name ComputeShaderUtils
 
 ## Helpful utilities for working with Arrays. 

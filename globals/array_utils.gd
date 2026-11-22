@@ -1,3 +1,4 @@
+@tool
 class_name ArrayUtils
 
 ## Helpful utilities for working with Arrays. 

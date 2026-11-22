@@ -1,3 +1,4 @@
+@tool
 class_name Physics3DUtils
 
 ## Returns the given node's center of mass in global space, taking body rotation into account.

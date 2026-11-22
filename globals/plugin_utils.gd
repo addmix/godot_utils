@@ -1,3 +1,4 @@
+@tool
 class_name PluginUtils
 
 # TODO: implement some dependency checker

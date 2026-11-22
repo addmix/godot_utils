@@ -1,3 +1,4 @@
+@tool
 class_name ResourceUpdater
 
 var updated_properties : Dictionary

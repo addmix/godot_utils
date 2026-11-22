@@ -1,3 +1,4 @@
+@tool
 class_name Physics2DUtils
 
 #https://github.com/godotengine/godot-proposals/issues/773

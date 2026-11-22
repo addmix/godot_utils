@@ -1,3 +1,4 @@
+@tool
 class_name MathUtils
 
 ## Euler's number (not to be confused with Euler's constant)

@@ -1,3 +1,4 @@
+@tool
 class_name DictionaryUtils
 
 ## Helpful utilities for working with Dictionaries. 

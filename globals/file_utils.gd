@@ -1,3 +1,4 @@
+@tool
 class_name FileUtils
 
 ## Helpful utilities for working with files. 

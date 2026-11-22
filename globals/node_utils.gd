@@ -1,3 +1,4 @@
+@tool
 class_name NodeUtils
 
 ## Connects a signal in a safe way. Warnings and errors can be silenced, but the signal connection error is returned (The same as [code]Object.connect()[/code])
